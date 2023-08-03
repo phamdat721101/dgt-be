@@ -18,7 +18,7 @@ const axios = require('axios');
 
 // app.use(express.static('public'))
 app.use(cors({
-    origin: 'https://bos.gg/'
+    origin: '*'
 }));
 
 app.get('/', async (req, res) => {
