@@ -15,20 +15,25 @@ const axios = require('axios');
   
 // getData();
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
-app.get('/', (req, res) => {
-    let resp = axios.get('http://localhost:4001/v1/status')
-    .then(response => {
-        console.log("PQD: ",response.data);
-        return response.data
-    })
-    .catch(error => {
-        console.log(error);
-    });
+app.get('/', async (req, res) => {
+    let resp = await axios.get('http://localhost:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
+
+    console.log("resp after: ", resp.data.data)
     res.json({
         code: 0,
-        data: resp
+        data: resp.data.data
+    })
+})
+
+app.get('/v1/asset', async (req, res) => {
+    let request = req.query.assetAddress
+    let resp = await axios.get(`http://localhost:4001/v1/asset?assetAddress=${request}`)
+
+    res.json({
+        code: 0,
+        data: resp.data.data
     })
 })
 
