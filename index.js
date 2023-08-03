@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cors = require('cors');
 
 const axios = require('axios');
 
@@ -16,6 +17,9 @@ const axios = require('axios');
 // getData();
 
 // app.use(express.static('public'))
+app.use(cors({
+    origin: '*'
+}));
 
 app.get('/', async (req, res) => {
     let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
@@ -36,6 +40,9 @@ app.get('/v1/asset', async (req, res) => {
         data: resp.data.data
     })
 })
+
+//implement decentralized asset management service -> generate NFT token 
+
 
 app.listen(process.env.PORT || 3000);
 
