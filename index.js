@@ -18,7 +18,7 @@ const axios = require('axios');
 // app.use(express.static('public'))
 
 app.get('/', async (req, res) => {
-    let resp = await axios.get('http://localhost:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
+    let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
 
     console.log("resp after: ", resp.data.data)
     res.json({
@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 
 app.get('/v1/asset', async (req, res) => {
     let request = req.query.assetAddress
-    let resp = await axios.get(`http://localhost:4001/v1/asset?assetAddress=${request}`)
+    let resp = await axios.get(`http://109.123.233.65:4001/v1/asset?assetAddress=${request}`)
 
     res.json({
         code: 0,
