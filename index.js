@@ -17,6 +17,8 @@ const axios = require('axios');
 // getData();
 
 // app.use(express.static('public'))
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin: '*'
 }));
