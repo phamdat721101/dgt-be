@@ -41,6 +41,20 @@ app.get('/v1/asset', async (req, res) => {
     })
 })
 
+app.post('/v1/invest', async (req, res) => {
+    let request = {
+        assetAdr: req.body.assetAdr,
+        investor: req.body.investor,
+        amount: req.body.amount,
+        data: req.body.data
+    }
+
+    res.json({
+        code: 0,
+        data: "invest success"
+    })
+})
+
 //implement decentralized asset management service -> generate NFT token 
 
 
