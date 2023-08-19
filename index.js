@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors');
 
 const axios = require('axios');
+const { appendFile } = require('fs');
 
 // const fetch = require('node-fetch');
 
@@ -43,6 +44,17 @@ app.get('/v1/asset', async (req, res) => {
     })
 })
 
+app.get('/v1/invest', async (req, res) => {
+    let request = req.query.orderAdr
+    console.log("Req: ", request)
+    let resp = await axios.get(`http://109.123.233.65:4001/v1/order?orderAdr=${request}`)
+
+    res.json({
+        code: 0,
+        data: resp.data.data
+    })
+})
+
 app.post('/v1/create_invest', async (req, res) =>{
     let resp = await axios.post("http://109.123.233.65:4001/v1/order/createOrder", {
         assetAddress: req.body.assetAddress,
@@ -56,6 +68,32 @@ app.post('/v1/create_invest', async (req, res) =>{
         owner: req.body.owner
     })
     
+    res.json({
+        code: 0,
+        data: resp.data
+    })
+})
+
+app.post('/v1/set_price', async (req, res) =>{
+    let resp = await axios.post("http://109.123.233.65:4001/v1/order/setPriceOrder", {
+        price: req.body.price,
+        symbol: req.body.symbol,
+        orderContractAddress: req.body.orderContractAddress
+    })
+
+    res.json({
+        code:0,
+        data: resp.data
+    })
+})
+
+app.post('/v1/confirm_result', async (req, res) =>{
+    let resp = await axios.post("http://109.123.233.65:4001/v1/order/confirmResult", {
+        symbol: req.body.symbol,
+        price: req.body.price,
+        orderContractAddress: req.body.orderContractAddress
+    })
+
     res.json({
         code: 0,
         data: resp.data
