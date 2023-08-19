@@ -43,6 +43,25 @@ app.get('/v1/asset', async (req, res) => {
     })
 })
 
+app.post('/v1/create_invest', async (req, res) =>{
+    let resp = await axios.post("http://109.123.233.65:4001/v1/order/createOrder", {
+        assetAddress: req.body.assetAddress,
+        symbol: req.body.symbol,
+        startPrice: req.body.startPrice,
+        endPrice:req.body.endPrice,
+        openAt: req.body.openAt,
+        closeAt: req.body.closeAt,
+        amount: req.body.amount,
+        duration: req.body.duration,
+        owner: req.body.owner
+    })
+    
+    res.json({
+        code: 0,
+        data: resp.data
+    })
+})
+
 app.post('/v1/invest', async (req, res) => {
     let request = {
         assetAdr: req.body.assetAdr,
