@@ -100,6 +100,19 @@ app.post('/v1/confirm_result', async (req, res) =>{
     })
 })
 
+app.post('/v1/withdraw', async (req, res) =>{
+    console.log("PQD claim profit")
+    let resp = await axios.post("http://109.123.233.65:4001/v1/order/claimProfit", {
+        orderAdr: req.body.orderAdr,
+        receiver: req.body.receiver
+    })
+
+    res.json({
+        code: 0,
+        data: resp.data
+    })
+})
+
 app.post('/v1/invest', async (req, res) => {
     let request = {
         assetAdr: req.body.assetAdr,
