@@ -34,6 +34,21 @@ app.get('/', async (req, res) => {
     })
 })
 
+app.get('/asset/detail', async(req, res) =>{
+    let assetAdr = req.query.assetAdr
+    res.json({
+        code: 0,
+        data: {
+            "owner":"0x59bC75a49B08088C1866fc2fF8E9776C9585ee5F",
+            "tokenId": 1306,
+            "assetId":"DGT",
+            "amount":1200,
+            "image":"link",
+            "information":"get information from herer"
+        }
+    })
+})
+
 app.get('/v1/asset', async (req, res) => {
     let request = req.query.assetAddress
     let resp = await axios.get(`http://109.123.233.65:4001/v1/asset?assetAddress=${request}`)
