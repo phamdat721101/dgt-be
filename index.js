@@ -264,7 +264,6 @@ app.get('/v1/history', async (req, res) =>{
     }
 
     res.json({
-        code: 0,
         data: res_history
     })
 })
