@@ -248,9 +248,12 @@ app.get('/v1/history', async (req, res) =>{
     console.log("History resp: ", resp)
     let res_history = []
     for(let i = 0; i < resp.length; i++){
+        let type = resp[i].type
+        type = type.split("::")
+        type = type[2] ? type[2] : "nil"
         let his_detail = {
             "wallet":resp[i].sender,
-            "type":resp[i].type,
+            "type":type,
             "amount":resp[i].parsedJson.amount,
             "tx_hash":resp[i].id.txDigest,
             "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=devnet`
