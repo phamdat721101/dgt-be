@@ -246,15 +246,22 @@ app.get('/v1/history', async (req, res) =>{
 
     // let resp = await history("6xKtWLEizBRy3hoJQZkRWu95H8iJKvakn47MbEQ2hMGJ")
     console.log("History resp: ", resp)
+    let res_history = []
+    for(let i = 0; i < resp.length; i++){
+        let his_detail = {
+            "wallet":resp[i].sender,
+            "type":resp[i].type,
+            "amount":resp[i].parsedJson.amount,
+            "tx_hash":resp[i].id.txDigest,
+            "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=devnet`
+        }
+
+        res_history.push(his_detail)
+    }
 
     res.json({
         code: 0,
-        data: {
-            "wallet":resp[0].sender,
-            "type":resp[0].type,
-            "amount":resp[0].parsedJson.amount,
-            "tx_hash":resp[0].id.txDigest
-        }
+        data: res_history
     })
 })
 
