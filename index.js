@@ -174,6 +174,90 @@ app.post('/v1/invest', async (req, res) => {
     })
 })
 
+/*
+ get sui transaction history
+*/
+const get_digest = async(user) =>{
+    let resp = await axios.post("https://explorer-rpc.devnet.sui.io/", {
+        "jsonrpc":"2.0",
+        "id": "19",
+        "method":"suix_queryTransactionBlocks",
+        "params":[
+            {
+                "filter":{
+                    "ToAddress":user
+                },
+                "options":{"showEffects":true,"showInput":true}
+            },
+                null,100,true
+            ]
+    })
+    
+    // return response
+    return resp.data
+}
+
+const history = async (digest) => {
+    // fetch from sui network
+    let resp = await axios.post("https://explorer-rpc.devnet.sui.io/", {
+        "jsonrpc":"2.0",
+        "id":1,
+        "method":"sui_getEvents",
+        "params":[
+            digest
+            // {
+            //     "Sender":"0x20cc2eb9d2559127da7c3eebd70169d5c95ff7eda490498951d32a3c53c50622"
+            // },
+            // {
+            //     "txDigest":"6xKtWLEizBRy3hoJQZkRWu95H8iJKvakn47MbEQ2hMGJ",
+            //     "eventSeq": "0"
+            // },
+            // 100,
+            // false
+            // {
+            //     "filter":{
+            //         "ToAddress":"0x20cc2eb9d2559127da7c3eebd70169d5c95ff7eda490498951d32a3c53c50622",
+            //         "Package": "0x7e3cee9f0eb68d0aca0f590411b172593690d6f40c1ef0ca64da9194508d4291"
+            //     },
+            //     "options":{"showEffects":true,"showInput":true}
+            // },
+                // null,100,true
+            ]
+    })
+    
+    // return response
+    return resp.data
+};
+
+app.get('/v1/history', async (req, res) =>{
+    let user_id = req.query.wallet
+    let digest = await get_digest(user_id)
+    let transactions = digest.result.data
+    let resp = []
+
+    for(let i = 0; i < transactions.length; i++){
+        let txInfo = await history(transactions[i].digest)
+        console.log("Tx info: ", txInfo)
+        if(txInfo.result.length == 0){
+            continue
+        }
+        resp.push(txInfo.result[0])
+    }
+
+    // let resp = await history("6xKtWLEizBRy3hoJQZkRWu95H8iJKvakn47MbEQ2hMGJ")
+    console.log("History resp: ", resp)
+
+    res.json({
+        code: 0,
+        data: {
+            "wallet":resp[0].sender,
+            "type":resp[0].type,
+            "amount":resp[0].parsedJson.amount,
+            "tx_hash":resp[0].id.txDigest
+        }
+    })
+})
+
 //implement decentralized asset management service -> generate NFT token 
 
 
