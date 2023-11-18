@@ -241,6 +241,10 @@ app.get('/v1/history', async (req, res) =>{
         if(txInfo.result.length == 0){
             continue
         }
+
+        // console.log("Timestamp: ", transactions[i])
+        txInfo.result[0].timestamp = transactions[i].timestampMs
+
         resp.push(txInfo.result[0])
     }
 
@@ -257,15 +261,14 @@ app.get('/v1/history', async (req, res) =>{
             "type":type,
             "amount":resp[i].parsedJson.amount,
             "tx_hash":resp[i].id.txDigest,
-            "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=devnet`
+            "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=devnet`,
+            "timestamp": resp[i].timestamp
         }
 
         res_history.push(his_detail)
     }
 
-    res.json({
-        data: res_history
-    })
+    res.json(res_history)
 })
 
 //implement decentralized asset management service -> generate NFT token 
