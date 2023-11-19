@@ -255,7 +255,7 @@ app.get('/v1/history', async (req, res) =>{
         let type = resp[i].type
         type = type.split("::")
         type = type[2] ? type[2] : "nil"
-        type = type == "DepositEvent" ? "Deposit" : "Withdraw"
+        type = type == "DepositEvent" ? "Gửi" : "Rút"
 
         console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
         dateFormat = new Date(parseInt(resp[i].timestamp))
