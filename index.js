@@ -178,7 +178,7 @@ app.post('/v1/invest', async (req, res) => {
  get sui transaction history
 */
 const get_digest = async(user) =>{
-    let resp = await axios.post("https://explorer-rpc.devnet.sui.io/", {
+    let resp = await axios.post("https://explorer-rpc.testnet.sui.io/", {
         "jsonrpc":"2.0",
         "id": "19",
         "method":"suix_queryTransactionBlocks",
@@ -194,12 +194,13 @@ const get_digest = async(user) =>{
     })
     
     // return response
+    console.log("Digest data: ", resp)
     return resp.data
 }
 
 const history = async (digest) => {
     // fetch from sui network
-    let resp = await axios.post("https://explorer-rpc.devnet.sui.io/", {
+    let resp = await axios.post("https://explorer-rpc.testnet.sui.io/", {
         "jsonrpc":"2.0",
         "id":1,
         "method":"sui_getEvents",
@@ -257,7 +258,7 @@ app.get('/v1/history', async (req, res) =>{
         type = type[2] ? type[2] : "nil"
         type = type == "DepositEvent" ? "Gửi" : "Rút"
 
-        console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
+        // console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
         dateFormat = new Date(parseInt(resp[i].timestamp))
         date_resp = dateFormat.getDate()+ "/" +(dateFormat.getMonth()+1)+
            "/"+dateFormat.getFullYear()+
@@ -283,6 +284,6 @@ app.get('/v1/history', async (req, res) =>{
 //implement decentralized asset management service -> generate NFT token 
 
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3001);
 
 module.exports = app;
