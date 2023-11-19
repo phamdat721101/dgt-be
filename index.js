@@ -259,7 +259,7 @@ app.get('/v1/history', async (req, res) =>{
 
         console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
         dateFormat = new Date(parseInt(resp[i].timestamp))
-        date_resp = "Date: "+ dateFormat.getDate()+ "/" +(dateFormat.getMonth()+1)+
+        date_resp = dateFormat.getDate()+ "/" +(dateFormat.getMonth()+1)+
            "/"+dateFormat.getFullYear()+
            " "+dateFormat.getHours()+
            ":"+dateFormat.getMinutes()+
