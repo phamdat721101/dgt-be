@@ -258,8 +258,12 @@ app.get('/v1/history', async (req, res) =>{
         type = type == "DepositEvent" ? "Deposit" : "Withdraw"
 
         console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
-        resp[i].timestamp = new Date(resp[i].timestamp * 1000).toISOString()
-        console.log("Timestamp after: ", resp[i].timestamp,)
+        dateFormat = new Date(parseInt(resp[i].timestamp))
+        date_resp = "Date: "+ dateFormat.getDate()+ "/" +(dateFormat.getMonth()+1)+
+           "/"+dateFormat.getFullYear()+
+           " "+dateFormat.getHours()+
+           ":"+dateFormat.getMinutes()+
+           ":"+dateFormat.getSeconds();
 
         let his_detail = {
             "wallet":resp[i].sender,
@@ -267,7 +271,7 @@ app.get('/v1/history', async (req, res) =>{
             "amount":resp[i].parsedJson.amount,
             "tx_hash":resp[i].id.txDigest,
             "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=devnet`,
-            "timestamp": resp[i].timestamp
+            "timestamp": date_resp
         }
 
         res_history.push(his_detail)
