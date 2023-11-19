@@ -237,7 +237,7 @@ app.get('/v1/history', async (req, res) =>{
 
     for(let i = 0; i < transactions.length; i++){
         let txInfo = await history(transactions[i].digest)
-        console.log("Tx info: ", txInfo)
+        // console.log("Tx info: ", txInfo)
         if(txInfo.result.length == 0){
             continue
         }
@@ -256,6 +256,11 @@ app.get('/v1/history', async (req, res) =>{
         type = type.split("::")
         type = type[2] ? type[2] : "nil"
         type = type == "DepositEvent" ? "Deposit" : "Withdraw"
+
+        console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
+        resp[i].timestamp = new Date(resp[i].timestamp * 1000).toISOString()
+        console.log("Timestamp after: ", resp[i].timestamp,)
+
         let his_detail = {
             "wallet":resp[i].sender,
             "type":type,
