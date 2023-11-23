@@ -271,7 +271,7 @@ app.get('/v1/history', async (req, res) =>{
             "type":type,
             "amount":resp[i].parsedJson.amount,
             "tx_hash":resp[i].id.txDigest,
-            "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=devnet`,
+            "url":`https://suiexplorer.com/txblock/${resp[i].id.txDigest}?network=testnet`,
             "timestamp": date_resp
         }
 
