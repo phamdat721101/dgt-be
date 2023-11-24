@@ -282,8 +282,15 @@ app.get('/v1/history', async (req, res) =>{
 })
 
 /*
-    ===============Create Vault===============
+    ===============Vault Route===============
 */
+
+app.get('/v1/vaults', async (req, res) => {
+    let request = req.query.assetAddress
+    let resp = await axios.get('http://109.123.233.65:3002/api/vaults')
+
+    res.json(resp.data)
+})
 
 app.post('/v1/create_vault', async (req, res) =>{
     let request = {
