@@ -286,7 +286,7 @@ app.get('/v1/history', async (req, res) =>{
 */
 
 app.post('/v1/create_vault', async (req, res) =>{
-    data = {
+    let request = {
         vault_name: req.body.vault_name,
         manager: req.body.manager,
         vault_desc: req.body.vault_desc,
@@ -304,21 +304,22 @@ app.post('/v1/create_vault', async (req, res) =>{
     let resp = await axios.post(
         "http://109.123.233.65:3002/api/create_vault",
         {
-          vault_name: data.vault_name,
-          manager: data.manager,
-          vault_desc: data.vault_desc,
-          vault_adr: data.vault_adr,
-          symbol: data.symbol,
-          deposit_asset: data.deposit_asset,
-          management_fee: data.management_fee,
-          performance_fee: data.performance_fee,
-          deposit_limit: data.deposit_limit,
-          lockup_time: data.lockup_time,
-          profit_est: data.profit_est,
-          loss_est: data.loss_est,
+          vault_name: request.vault_name,
+          manager: request.manager,
+          vault_desc: request.vault_desc,
+          vault_adr: request.vault_adr,
+          symbol: request.symbol,
+          deposit_asset: request.deposit_asset,
+          management_fee: request.management_fee,
+          performance_fee: request.performance_fee,
+          deposit_limit: request.deposit_limit,
+          lockup_time: request.lockup_time,
+          profit_est: request.profit_est,
+          loss_est: request.loss_est,
         }
       );
 
+    console.log("Resp: ", resp)
     res.json({
         code: 0,
         data: resp.data
