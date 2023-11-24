@@ -281,7 +281,49 @@ app.get('/v1/history', async (req, res) =>{
     res.json(res_history)
 })
 
-//implement decentralized asset management service -> generate NFT token 
+/*
+    ===============Create Vault===============
+*/
+
+app.post('/v1/create_vault', async (req, res) =>{
+    data = {
+        vault_name: req.body.vault_name,
+        manager: req.body.manager,
+        vault_desc: req.body.vault_desc,
+        vault_adr: req.body.vault_adr,
+        symbol: req.body.symbol,
+        deposit_asset: req.body.deposit_asset,
+        management_fee: req.body.management_fee,
+        performance_fee: req.body.performance_fee,
+        deposit_limit: req.body.deposit_limit,
+        lockup_time: req.body.lockup_time,
+        profit_est: req.body.profit_est,
+        loss_est: req.body.loss_est
+    }
+    console.log("DigiTrust create vault")
+    let resp = await axios.post(
+        "http://109.123.233.65:3002/api/create_vault",
+        {
+          vault_name: data.vault_name,
+          manager: data.manager,
+          vault_desc: data.vault_desc,
+          vault_adr: data.vault_adr,
+          symbol: data.symbol,
+          deposit_asset: data.deposit_asset,
+          management_fee: data.management_fee,
+          performance_fee: data.performance_fee,
+          deposit_limit: data.deposit_limit,
+          lockup_time: data.lockup_time,
+          profit_est: data.profit_est,
+          loss_est: data.loss_est,
+        }
+      );
+
+    res.json({
+        code: 0,
+        data: resp.data
+    })
+})
 
 
 app.listen(process.env.PORT || 3001);
