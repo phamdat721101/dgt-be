@@ -264,7 +264,7 @@ const evm_history = async (req) =>{
 app.get('/v1/history', async (req, res) =>{
     let user_id = req.query.wallet
     let chain = req.query.chain
-    if(chain == "evm"){
+    if(chain == "evm" || !chain){
         let resp_his = await evm_history(user_id)
         res.json(resp_his)
         return
