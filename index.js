@@ -236,7 +236,7 @@ const evm_history = async (req) =>{
     let listTx = []
 
     for(let i = 0; i < transactions.length; i++){
-        let type = i % 2 == 0 ? "Gửi" : "Rút"
+        let type = i % 2 == 0 ? "Deposit" : "Withdraw"
 
         // console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
         dateFormat = new Date(parseInt(transactions[i].createdAt) * 1000)
