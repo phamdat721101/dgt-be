@@ -230,8 +230,45 @@ const history = async (digest) => {
     return resp.data
 };
 
+const evm_history = async (req) =>{
+    let resp = await axios.get(`https://api-baobab.klaytnscope.com/v2/accounts/${req}/txs`)
+    let transactions = resp.data.result
+    let listTx = []
+
+    for(let i = 0; i < transactions.length; i++){
+        let type = i % 2 == 0 ? "Gửi" : "Rút"
+
+        // console.log("Timestamp: ", resp[i].timestamp, " -cv: ")
+        dateFormat = new Date(parseInt(transactions[i].createdAt) * 1000)
+        date_resp = dateFormat.getDate()+ "/" +(dateFormat.getMonth()+1)+
+           "/"+dateFormat.getFullYear()+
+           " "+dateFormat.getHours()+
+           ":"+dateFormat.getMinutes()+
+           ":"+dateFormat.getSeconds();
+
+        let his_detail = {
+            "wallet":transactions[i].fromAddress,
+            "type":type,
+            "amount":transactions[i].amount,
+            "tx_hash":transactions[i].txHash,
+            "url":`https://baobab.klaytnscope.com/tx/${transactions[i].txHash}?tabId=internalTx`,
+            "timestamp": date_resp
+        }
+
+        listTx.push(his_detail)
+    }
+
+    return listTx
+}
+
 app.get('/v1/history', async (req, res) =>{
     let user_id = req.query.wallet
+    let chain = req.query.chain
+    if(chain == "evm"){
+        let resp_his = await evm_history(user_id)
+        res.json(resp_his)
+        return
+    }
     let digest = await get_digest(user_id)
     let transactions = digest.result.data
     let resp = []
