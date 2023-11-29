@@ -246,10 +246,17 @@ const evm_history = async (req) =>{
            ":"+dateFormat.getMinutes()+
            ":"+dateFormat.getSeconds();
 
+        let tx_detail = await axios.get(`https://api-baobab.klaytnscope.com/v2/txs/${transactions[i].txHash}/ftTransfers`)
+        // console.log("Tx_detail: ", tx_detail.data.result)
+        let amount = 0
+        if(tx_detail.data.result.length >= 1){
+            amount = tx_detail.data.result[0].amount / (10**17)
+        }
+
         let his_detail = {
             "wallet":transactions[i].fromAddress,
             "type":type,
-            "amount":transactions[i].amount,
+            "amount":amount,
             "tx_hash":transactions[i].txHash,
             "url":`https://baobab.klaytnscope.com/tx/${transactions[i].txHash}?tabId=internalTx`,
             "timestamp": date_resp
