@@ -25,12 +25,12 @@ app.use(cors({
 }));
 
 app.get('/', async (req, res) => {
-    let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
+    // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
 
-    console.log("resp after: ", resp.data.data)
+    // console.log("resp after: ", resp.data.data)
     res.json({
         code: 0,
-        data: resp.data.data
+        data: "PQD"
     })
 })
 
