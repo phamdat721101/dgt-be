@@ -247,7 +247,7 @@ const evm_history = async (req) =>{
            ":"+dateFormat.getSeconds();
 
         let tx_detail = await axios.get(`https://api-baobab.klaytnscope.com/v2/txs/${transactions[i].txHash}/ftTransfers`)
-        // console.log("Tx_detail: ", tx_detail.data.result)
+        console.log("Tx_detail: ", tx_detail.data.result)
         let amount = 0
         if(tx_detail.data.result.length >= 1){
             amount = tx_detail.data.result[0].amount / (10**17)
