@@ -344,6 +344,35 @@ app.get('/v1/vaults', async (req, res) => {
     res.json(resp.data)
 })
 
+app.get('/top_vaults', async (req, res) => {
+    let request = req.query.assetAddress
+    let resp = [
+        {
+            "vault_name": "dgt1",
+            "manager": "dgt_manager",
+            "vault_desc": "making profit",
+            "vault_adr": "0x312ms824234",
+            "return":24
+        },
+        {
+            "vault_name": "dgt2",
+            "manager": "dgt_manager_v1",
+            "vault_desc": "stable profit",
+            "vault_adr": "0x312ms8wrwerwe24234",
+            "return":27
+        },
+        {
+            "vault_name": "dgt3",
+            "manager": "dgt_manager_v2",
+            "vault_desc": "advance profit",
+            "vault_adr": "0x312ms8242342411",
+            "return":30
+        }
+    ]
+
+    res.json(resp)
+})
+
 app.post('/v1/create_vault', async (req, res) =>{
     let request = {
         vault_name: req.body.vault_name,
