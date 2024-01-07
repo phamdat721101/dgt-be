@@ -337,39 +337,49 @@ app.get('/v1/history', async (req, res) =>{
     ===============Vault Route===============
 */
 
-app.get('/v1/vaults', async (req, res) => {
+app.get('/vaults', async (req, res) => {
     let request = req.query.assetAddress
-    let resp = await axios.get('http://109.123.233.65:3002/api/vaults')
+    // let resp = await axios.get('http://109.123.233.65:3002/api/vaults')
+    let resp = [{
+        "vault_name": "dgt1",
+        "manager": "dgt_manager",
+        "vault_desc": "making profit",
+        "vault_adr": "0x312ms824234",
+        "return":24,
+        "assets":["SEI", "SUI", "INJ"]
+    }]
 
-    res.json(resp.data)
+    res.json(resp)
 })
 
 app.get('/top_vaults', async (req, res) => {
-    let request = req.query.assetAddress
-    let resp = [
-        {
-            "vault_name": "dgt1",
-            "manager": "dgt_manager",
-            "vault_desc": "making profit",
-            "vault_adr": "0x312ms824234",
-            "return":24
-        },
-        {
-            "vault_name": "dgt2",
-            "manager": "dgt_manager_v1",
-            "vault_desc": "stable profit",
-            "vault_adr": "0x312ms8wrwerwe24234",
-            "return":27
-        },
-        {
-            "vault_name": "dgt3",
-            "manager": "dgt_manager_v2",
-            "vault_desc": "advance profit",
-            "vault_adr": "0x312ms8242342411",
-            "return":30
-        }
-    ]
-
+    let option = req.query.option 
+    let resp = {
+        "top_vaults":[
+            {
+                "vault_name": "dgt1",
+                "manager": "dgt_manager",
+                "vault_desc": "making profit",
+                "vault_adr": "0x312ms824234",
+                "return":24
+            },
+            {
+                "vault_name": "dgt2",
+                "manager": "dgt_manager_v1",
+                "vault_desc": "stable profit",
+                "vault_adr": "0x312ms8wrwerwe24234",
+                "return":27
+            },
+            {
+                "vault_name": "dgt3",
+                "manager": "dgt_manager_v2",
+                "vault_desc": "advance profit",
+                "vault_adr": "0x312ms8242342411",
+                "return":30
+            }
+        ]
+    }
+        
     res.json(resp)
 })
 
