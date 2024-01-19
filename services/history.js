@@ -16,6 +16,12 @@ const history = async (user) => {
     });
 };
 
+async function vault_generator(){
+    return "PQD"
+}
+
+module.exports = vault_generator
+
 // fetch("https://explorer-rpc.devnet.sui.io/", {
 //   "headers": {
 //     "accept": "*/*",

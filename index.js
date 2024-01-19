@@ -4,7 +4,9 @@ const path = require('path');
 const cors = require('cors');
 
 const axios = require('axios');
+
 const { appendFile } = require('fs');
+const vault_generator = require('./services/history');
 
 // const fetch = require('node-fetch');
 
@@ -28,9 +30,10 @@ app.get('/', async (req, res) => {
     // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
 
     // console.log("resp after: ", resp.data.data)
+    let resp = await vault_generator()
     res.json({
         code: 0,
-        data: "PQD"
+        data: resp
     })
 })
 
@@ -346,8 +349,34 @@ app.get('/vaults', async (req, res) => {
         "vault_desc": "making profit",
         "vault_adr": "0x312ms824234",
         "return":24,
-        "assets":["SEI", "SUI", "INJ"]
+        "assets":["CETUS", "SUI", "SUILIEN"],
+        "created_at":1231,
+        "updated_at":12312,
     }]
+
+    res.json(resp)
+})
+
+app.get('/vault_detail', async (req, res) => {
+    let vault = req.query.vault
+    console.log("Vault_id: ", vault)
+    // let resp = await axios.get('http://109.123.233.65:3002/api/vaults')
+    let resp = [
+        {
+            "details": [{
+                "tx_hash": "33a688d2cef184c161643a2b8fa77675",
+                "pool": "0xaa57c66ba6ee8f2219376659f727f2b13d49ead66435aa99f57bb008a64a8042",
+                "exchange": "SUItoCETUS",
+                "swap_in": 5,
+                "swap_out": 10,
+                "timestamp":428342384,
+            }],
+        }
+    ]
+
+    if(!vault || vault != "dgt1"){
+        resp = ""
+    }
 
     res.json(resp)
 })
