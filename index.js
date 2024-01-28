@@ -2,13 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
-
 const axios = require('axios');
 
-const { appendFile } = require('fs');
-const vault_generator = require('./services/history');
+const user = require('./routes/user.route')
 
-// const fetch = require('node-fetch');
+const vault_generator = require('./services/history');
 
 // async function getData() {
 //     const url = 'http://localhost:4001/v1/status';
@@ -17,14 +15,13 @@ const vault_generator = require('./services/history');
 //     console.log("PQD: ", jsonResponse);
 // } 
   
-// getData();
-
 // app.use(express.static('public'))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin: '*'
 }));
+app.use('/v1', user)
 
 app.get('/', async (req, res) => {
     // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
@@ -288,7 +285,8 @@ app.get('/v1/history', async (req, res) =>{
         return
     }
     let digest = await get_digest(user_id)
-    let transactions = digest.result.data
+    let transactions = digest.result.data1h
+    
     let resp = []
 
     for(let i = 0; i < transactions.length; i++){
@@ -300,7 +298,11 @@ app.get('/v1/history', async (req, res) =>{
 
         // console.log("Timestamp: ", transactions[i])
         txInfo.result[0].timestamp = transactions[i].timestampMs
-
+        //making connection for blockchain developer if they generate multiple version f
+        //finalized version to start: focus on building PQD <> DGT as the defi solution 
+        let desofi_protocol = async function dgt(){
+            
+        }
         resp.push(txInfo.result[0])
     }
 
@@ -454,6 +456,8 @@ app.post('/v1/create_vault', async (req, res) =>{
 })
 
 
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 3001, () =>{
+    console.log("Listening at 3001")
+});
 
 module.exports = app;
