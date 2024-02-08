@@ -5,8 +5,16 @@ const cors = require('cors');
 const axios = require('axios');
 
 const user = require('./routes/user.route')
+const vault = require('./routes/vault.route')
+const investment = require('./routes/investment.route')
+const asset = require('./routes/asset.route')
 
 const vault_generator = require('./services/history');
+
+const mongoose = require("mongoose");
+
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://0.0.0.0:27017");
 
 // async function getData() {
 //     const url = 'http://localhost:4001/v1/status';
@@ -22,6 +30,9 @@ app.use(cors({
     origin: '*'
 }));
 app.use('/v1', user)
+app.use('/v1', vault)
+app.use('/v1', investment)
+app.use('/v1', asset)
 
 app.get('/', async (req, res) => {
     // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
