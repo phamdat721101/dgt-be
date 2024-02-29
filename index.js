@@ -11,10 +11,10 @@ const asset = require('./routes/asset.route')
 
 const vault_generator = require('./services/history');
 
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://0.0.0.0:27017");
+// mongoose.Promise = global.Promise;
+// mongoose.connect("mongodb://0.0.0.0:27017");
 
 // async function getData() {
 //     const url = 'http://localhost:4001/v1/status';

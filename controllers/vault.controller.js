@@ -1,14 +1,77 @@
+exports.list_vault = async(req, res, next) =>{
+    const vaults = [
+        {
+            "vault_id":"finX",
+            "vault_name":"FinX",
+            "return":24,
+            "tvl":2411,
+            "monthly_return":"24.32%",
+            "daily_return":"1.8%",
+            "manager":"Dgt invest",
+            "des":"DigiTrust ecosystem",
+            "timestamp":2424,
+            "chain":"EVM"
+        },
+        {
+            "vault_id":"btcX",
+            "vault_name":"BTCX",
+            "return":24,
+            "tvl":2411,
+            "monthly_return":"24.32%",
+            "daily_return":"1.8%",
+            "manager":"Dgt invest",
+            "des":"DigiTrust ecosystem",
+            "timestamp":2424,
+            "chain":"EVM"
+        },
+        {
+            "vault_id":"polX",
+            "vault_name":"PolygonX",
+            "return":24,
+            "tvl":2411,
+            "monthly_return":"24.32%",
+            "daily_return":"1.8%",
+            "manager":"Dgt invest",
+            "des":"DigiTrust ecosystem",
+            "timestamp":2424,
+            "chain":"EVM"
+        },
+        {
+            "vault_id":"arbX",
+            "vault_name":"ArbitrumX",
+            "return":24,
+            "tvl":2411,
+            "monthly_return":"24.32%",
+            "daily_return":"1.8%",
+            "manager":"Dgt invest",
+            "des":"DigiTrust ecosystem",
+            "timestamp":2424,
+            "chain":"EVM"
+        }
+    ]
+
+    res.json(vaults)
+}
+
 exports.information = async (req, res, next) => {
     try {
+        let vault_id = req.query.vault_id
+        console.log("Vault id: ", vault_id)
         const vault_info = {
+            "vault_id": "dgt1",
             "vault_name": "dgt_info_1",
             "manager": "dgt_manager",
+            "logo":"http://localhost:3000/image/logo",
             "vault_desc": "making profit",
             "vault_adr": "0x312ms824234",
             "return":24,
             "assets":["CETUS", "SUI", "SUILIEN"],
             "created_at":1231,
             "updated_at":12312,
+            "tvl": 4907, 
+            "volume": 15,
+            "price": 241105,
+            "currency":"$"
         }
         res.json({
             code: 0,
