@@ -1,3 +1,14 @@
+exports.vault_balance = async(req, res, next) =>{
+    let vault_id = req.query.vault_id
+    const vault_balance = {
+        "vault_id":"dgt_v1",
+        "balance":24111306, 
+        "staked": 20051998
+    }
+
+    res.json(vault_balance)
+}
+
 exports.profile = async (req, res, next) => {
     try {
         const user_resp = {

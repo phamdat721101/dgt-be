@@ -73,10 +73,7 @@ exports.information = async (req, res, next) => {
             "price": 241105,
             "currency":"$"
         }
-        res.json({
-            code: 0,
-            data: vault_info
-        });
+        res.json(vault_info);
     } catch (error) {
         console.log("Error to get user profile: ", error)
         next(error);
