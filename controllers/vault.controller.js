@@ -57,22 +57,24 @@ exports.information = async (req, res, next) => {
     try {
         let vault_id = req.query.vault_id
         console.log("Vault id: ", vault_id)
-        const vault_info = {
-            "vault_id": "dgt1",
-            "vault_name": "dgt_info_1",
-            "manager": "dgt_manager",
-            "logo":"http://localhost:3000/image/logo",
-            "vault_desc": "making profit",
-            "vault_adr": "0x312ms824234",
-            "return":24,
-            "assets":["CETUS", "SUI", "SUILIEN"],
-            "created_at":1231,
-            "updated_at":12312,
-            "tvl": 4907, 
-            "volume": 15,
-            "price": 241105,
-            "currency":"$"
-        }
+        const vault_info = [
+            {
+                "vault_id": "dgt1",
+                "vault_name": "dgt_info_1",
+                "manager": "dgt_manager",
+                "logo":"http://localhost:3000/image/logo",
+                "vault_desc": "making profit",
+                "vault_adr": "0x312ms824234",
+                "return":24,
+                "assets":["CETUS", "SUI", "SUILIEN"],
+                "created_at":1231,
+                "updated_at":12312,
+                "tvl": 4907, 
+                "volume": 15,
+                "price": 241105,
+                "currency":"$"
+            }
+        ]
         res.json(vault_info);
     } catch (error) {
         console.log("Error to get user profile: ", error)
