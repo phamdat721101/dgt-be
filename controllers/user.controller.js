@@ -1,3 +1,64 @@
+const {
+	DEFAULT_ED25519_DERIVATION_PATH,
+	Ed25519Keypair,
+	JsonRpcProvider,
+	RawSigner,
+	devnetConnection,
+	TransactionBlock,
+    toB64,
+    fromExportedKeypair,
+    testnetConnection
+} = require('@mysten/sui.js');
+const provider = new JsonRpcProvider(testnetConnection);
+const privkey = '0xbc59c0992aa183ca50134fb7734844f473f43428bddf6cc55c95bd87ede72ad2'
+const privateKeyBytes = Uint8Array.from(Buffer.from(privkey.slice(2), "hex")); 
+
+const keypair = fromExportedKeypair({
+    schema: "ED25519",
+    privateKey: toB64(privateKeyBytes)
+});
+
+const signer = new RawSigner(keypair, provider);
+const PACKAGE_ID = '0x2f8a1bdc3977cc134bf7bac4699712009878c7bd8ef72d144325a5f032d1c8ef'
+const TREASURY_ID = '0x5fa75f3cc2bae39c34310a13809c507e027933f4acf5b9e3c5129402d7af2bde'
+
+async function subscribe_signal(data) {
+    try {
+        const tx = new TransactionBlock();
+        await tx.moveCall({
+            target: `${PACKAGE_ID}::dgt::mint`,
+            arguments: [
+                tx.object("0x270875b1dbe6ad01ae1bf1ce0bf3e1526bbe32e9c879765cb6fed3ea4109d748"),
+                tx.pure("2411"),
+                tx.pure(data.wallet)
+            ],
+        });
+
+        const transaction = await signer.signAndExecuteTransactionBlock({
+            transactionBlock: tx,
+            options: {
+                showInput: true,
+                showEffects: true,
+                showEvents: true,
+                showObjectChanges: true,
+            }
+        });
+
+        console.log("DGT resp: ", transaction);
+        return transaction
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.subscribe = async(req, res, next) =>{
+    let user_info = {
+        "chain": req.body.chain, 
+        "wallet": req.body.wallet, 
+    }
+    let resp = await subscribe_signal(user_info)
+    res.json(resp)
+}
 exports.vault_balance = async(req, res, next) =>{
     let vault_id = req.query.vault_id
     const vault_balance = [
