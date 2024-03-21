@@ -61,7 +61,8 @@ exports.subscribe = async(req, res, next) =>{
         return "Error subscrtiption"
     }
     res.json({
-        "dgt_id": resp[0].objectId
+        "dgt_id": resp[0].objectId,
+        "digest": resp[0].digest
     })
 }
 exports.vault_balance = async(req, res, next) =>{
