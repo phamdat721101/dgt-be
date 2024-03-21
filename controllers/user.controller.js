@@ -45,7 +45,7 @@ async function subscribe_signal(data) {
         });
 
         console.log("DGT resp: ", transaction);
-        return transaction
+        return transaction.transaction.data.transaction.inputs
     } catch (error) {
         console.log(error);
     }
@@ -57,7 +57,12 @@ exports.subscribe = async(req, res, next) =>{
         "wallet": req.body.wallet, 
     }
     let resp = await subscribe_signal(user_info)
-    res.json(resp)
+    if(resp.length <= 0){
+        return "Error subscrtiption"
+    }
+    res.json({
+        "dgt_id": resp[0].objectId
+    })
 }
 exports.vault_balance = async(req, res, next) =>{
     let vault_id = req.query.vault_id
