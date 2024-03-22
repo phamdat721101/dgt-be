@@ -80,15 +80,63 @@ exports.vault_balance = async(req, res, next) =>{
 
 exports.profile = async (req, res, next) => {
     try {
+        const user_id = req.query.user_id
         const user_resp = {
-            "user_adr":"0x13123",
-            "balance":2411, 
-            "vault":"DigiTrust"
+            "name":"DigiTrust",
+            "wallet":"0x13123",
+            "des":"it is the best capital for funding allocation",
+            "holding_amount":2411, 
+            "managed_amount":2411,
+            "dgt_amount":15000, 
+            "logo_url":"http://localhost/pqd_user",
+            "vaults":[
+                {
+                    "name":"dgt_internal",
+                    "balance":2411, 
+                    "list_price":"1306",
+                    "current_price":"30.21",
+                    "manager":"pqd capital",
+                    "tvl":24111306,
+                    "monthly_return":"24.11",
+                    "daily_return":"2.4",
+                    "logo_url":"http://localhost/dgt_internal"
+                },
+                {
+                    "name":"cetus_internal",
+                    "balance":2411, 
+                    "list_price":"1306",
+                    "current_price":"30.21",
+                    "manager":"cetus capital",
+                    "tvl":24111306,
+                    "monthly_return":"24.11",
+                    "daily_return":"2.4",
+                    "logo_url":"http://localhost/dgt_internal"
+                },
+                {
+                    "name":"cetus_internal",
+                    "balance":2411, 
+                    "list_price":"1306",
+                    "current_price":"30.21",
+                    "manager":"cetus capital",
+                    "tvl":24111306,
+                    "monthly_return":"24.11",
+                    "daily_return":"2.4",
+                    "logo_url":"http://localhost/dgt_internal"
+                },
+                {
+                    "name":"aleo_internal",
+                    "balance":2411, 
+                    "list_price":"1306",
+                    "current_price":"30.21",
+                    "manager":"aleo capital",
+                    "tvl":24111306,
+                    "monthly_return":"24.11",
+                    "daily_return":"2.4",
+                    "logo_url":"http://localhost/dgt_internal"
+                }
+            ]
         }
-        res.json({
-            code: 0,
-            data: user_resp
-        });
+        res.json(user_resp);
     } catch (error) {
         console.log("Error to get user profile: ", error)
         next(error);
