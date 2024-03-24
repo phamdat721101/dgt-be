@@ -17,3 +17,21 @@ exports.asset = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.sub_signal = async(req, res, next) =>{
+    const signal = [
+        {
+            "symbol":"pepe_growth",
+            "contract":"0x12",
+            "chain":"solana",
+            "entry":"0.123",
+            "stop_loss":"59%",
+            "profit":"60%",
+            "link":"gfg",
+            "total_cap":"13k",
+            "created_at":"24/3 - 7h03",
+        }
+    ]
+
+    res.json(signal)
+}

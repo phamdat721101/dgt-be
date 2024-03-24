@@ -157,3 +157,21 @@ exports.user_portfolio = async(req, res, next)=>{
         data: portfolio
     })
 }
+
+exports.user_history = async(req, res, next)=>{
+    const user_history = [
+        {
+            "date": "0x6123m",
+            "name": "dgt_rwa_bucket",
+            "type": "hedge",
+            "invest_amount":2411, 
+            "profit":"18%", 
+            "daily_loss":"1%",
+            "total_loss":"5%",
+            "dgt_score": 8,
+            "status":true
+        }
+    ]
+
+    res.json(user_history)
+}
