@@ -21,17 +21,17 @@ exports.asset = async (req, res, next) => {
 exports.sub_signal = async(req, res, next) =>{
     const signal = [
         {
-            "name":"KEANU COIN",
-            "symbol":"keanu",
-            "contract":"AdTqNaPieJhNzNWNf1bTi7ffbmFty71TX7zeFxxvrFgg",
+            "name":"Squirtle",
+            "symbol":"SQR",
+            "contract":"CGpH5EYwSByWnFSyzKMnbPWUYcAu2bCRKDvHDWs4uBBs",
             "chain":"solana",
-            "entry":"fibo_zon",
-            "stop_loss":"59%",
-            "profit":"120%",
-            "link":"https://www.dextools.io/app/en/solana/pair-explorer/4AtL9cjyaMFnU7qopKaMWJJGQAmu5L3QZN9FBfX6aDko?t=1711243318693",
+            "entry":"0.00006853",
+            "stop_loss":"97%",
+            "profit":"190%",
+            "link":"https://www.dextools.io/app/en/solana/pair-explorer/BashvT8fjJVNAcY5dp8ZsiFHU3BG22ey1X4VwY75hMza?t=1711332564435",
             "dex_protocol":"raydium",
-            "total_cap":"477k",
-            "created_at":"3/24/2024 03:42",
+            "total_cap":"35.98k",
+            "created_at":"3/25/2024 04:27",
         }
     ]
 
