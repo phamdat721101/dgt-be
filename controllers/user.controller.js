@@ -1,3 +1,4 @@
+const axios = require("axios")
 const {
 	DEFAULT_ED25519_DERIVATION_PATH,
 	Ed25519Keypair,
@@ -9,6 +10,7 @@ const {
     fromExportedKeypair,
     testnetConnection
 } = require('@mysten/sui.js');
+const req = require('express/lib/request');
 const provider = new JsonRpcProvider(testnetConnection);
 const privkey = '0xbc59c0992aa183ca50134fb7734844f473f43428bddf6cc55c95bd87ede72ad2'
 const privateKeyBytes = Uint8Array.from(Buffer.from(privkey.slice(2), "hex")); 
@@ -144,18 +146,14 @@ exports.profile = async (req, res, next) => {
 };
 
 exports.user_portfolio = async(req, res, next)=>{
-    const portfolio = {
-        "user_adr": "0x6123m",
-        "total_portfolio_value": 2411,
-        "roi": 24,
-        "risk_metrics": 8,
-        "risk_guard":6
-    }
+    const pool_adr = "0xbd85f61a1b755b6034c62f16938d6da7c85941705d9d10aa1843b809b0e35582"
+    const chain = "sui"
+    let signal_info = await axios.get(`https://api.dexscreener.com/latest/dex/pairs/${chain}/${pool_adr}`)
+    // console.log("Signal info: ", signal_info.data.pairs)
 
-    res.json({
-        code: 0,
-        data: portfolio
-    })
+    const portfolio = signal_info.data.pairs
+
+    res.json(portfolio)
 }
 
 exports.user_history = async(req, res, next)=>{
