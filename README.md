@@ -1,3 +1,3 @@
-### An Express.js App deployed to Vercel
+### DigiTrust services
 
-> Here's a live [demo](https://express-to-vercel-demo.vercel.app/)
+> Here's a live [DGT](https://dgt-app.vercel.app/)
