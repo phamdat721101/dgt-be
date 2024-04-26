@@ -370,30 +370,6 @@ app.get('/vaults', async (req, res) => {
     res.json(resp)
 })
 
-app.get('/vault_detail', async (req, res) => {
-    let vault = req.query.vault
-    console.log("Vault_id: ", vault)
-    // let resp = await axios.get('http://109.123.233.65:3002/api/vaults')
-    let resp = [
-        {
-            "details": [{
-                "tx_hash": "33a688d2cef184c161643a2b8fa77675",
-                "pool": "0xaa57c66ba6ee8f2219376659f727f2b13d49ead66435aa99f57bb008a64a8042",
-                "exchange": "SUItoCETUS",
-                "swap_in": 5,
-                "swap_out": 10,
-                "timestamp":428342384,
-            }],
-        }
-    ]
-
-    if(!vault || vault != "dgt1"){
-        resp = ""
-    }
-
-    res.json(resp)
-})
-
 app.get('/top_vaults', async (req, res) => {
     let option = req.query.option 
     let resp = {
