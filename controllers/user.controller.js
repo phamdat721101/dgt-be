@@ -213,3 +213,23 @@ exports.vault_allocation = async(req, res, next)=>{
 
     res.json(vault_allocation)
 }
+
+exports.user_tracker = async(req, res, next)=>{
+    let user_adr = req.query.user_adr
+    console.log("User address: ", user_adr)
+    const user_tracker = [
+        {
+            "date": "15/5/2024",
+            "name": "dgt_rwa_bucket",
+            "symbol": "dgt_v1",
+            "quantity": 2411, 
+            "purchase_price":"18%", 
+            "current_price":"1%",
+            "total_loss":"5%",
+            "tx_hash":"0x13c414324",
+            "exp_date": "15/8/2024"
+        }
+    ]
+
+    res.json(user_tracker)
+}
