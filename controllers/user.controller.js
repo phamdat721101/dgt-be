@@ -1,57 +1,59 @@
 const axios = require("axios")
-const {
-	DEFAULT_ED25519_DERIVATION_PATH,
-	Ed25519Keypair,
-	JsonRpcProvider,
-	RawSigner,
-	devnetConnection,
-	TransactionBlock,
-    toB64,
-    fromExportedKeypair,
-    testnetConnection
-} = require('@mysten/sui.js');
-const req = require('express/lib/request');
-const provider = new JsonRpcProvider(testnetConnection);
-const privkey = '0xbc59c0992aa183ca50134fb7734844f473f43428bddf6cc55c95bd87ede72ad2'
-const privateKeyBytes = Uint8Array.from(Buffer.from(privkey.slice(2), "hex")); 
+const sui_monitor = require('../chains/sui_monitor')
 
-const keypair = fromExportedKeypair({
-    schema: "ED25519",
-    privateKey: toB64(privateKeyBytes)
-});
+// const {
+// 	DEFAULT_ED25519_DERIVATION_PATH,
+// 	Ed25519Keypair,
+// 	JsonRpcProvider,
+// 	RawSigner,
+// 	devnetConnection,
+// 	TransactionBlock,
+//     toB64,
+//     fromExportedKeypair,
+//     testnetConnection
+// } = require('@mysten/sui.js/client');
+// const req = require('express/lib/request');
+// const provider = new JsonRpcProvider(testnetConnection);
+// const privkey = '0xbc59c0992aa183ca50134fb7734844f473f43428bddf6cc55c95bd87ede72ad2'
+// const privateKeyBytes = Uint8Array.from(Buffer.from(privkey.slice(2), "hex")); 
 
-const signer = new RawSigner(keypair, provider);
-const PACKAGE_ID = '0x2f8a1bdc3977cc134bf7bac4699712009878c7bd8ef72d144325a5f032d1c8ef'
-const TREASURY_ID = '0x5fa75f3cc2bae39c34310a13809c507e027933f4acf5b9e3c5129402d7af2bde'
+// const keypair = fromExportedKeypair({
+//     schema: "ED25519",
+//     privateKey: toB64(privateKeyBytes)
+// });
 
-async function subscribe_signal(data) {
-    try {
-        const tx = new TransactionBlock();
-        await tx.moveCall({
-            target: `${PACKAGE_ID}::dgt::mint`,
-            arguments: [
-                tx.object("0x270875b1dbe6ad01ae1bf1ce0bf3e1526bbe32e9c879765cb6fed3ea4109d748"),
-                tx.pure("2411"),
-                tx.pure(data.wallet)
-            ],
-        });
+// const signer = new RawSigner(keypair, provider);
+// const PACKAGE_ID = '0x2f8a1bdc3977cc134bf7bac4699712009878c7bd8ef72d144325a5f032d1c8ef'
+// const TREASURY_ID = '0x5fa75f3cc2bae39c34310a13809c507e027933f4acf5b9e3c5129402d7af2bde'
 
-        const transaction = await signer.signAndExecuteTransactionBlock({
-            transactionBlock: tx,
-            options: {
-                showInput: true,
-                showEffects: true,
-                showEvents: true,
-                showObjectChanges: true,
-            }
-        });
+// async function subscribe_signal(data) {
+//     try {
+//         const tx = new TransactionBlock();
+//         await tx.moveCall({
+//             target: `${PACKAGE_ID}::dgt::mint`,
+//             arguments: [
+//                 tx.object("0x270875b1dbe6ad01ae1bf1ce0bf3e1526bbe32e9c879765cb6fed3ea4109d748"),
+//                 tx.pure("2411"),
+//                 tx.pure(data.wallet)
+//             ],
+//         });
 
-        console.log("DGT resp: ", transaction);
-        return transaction.transaction.data.transaction.inputs
-    } catch (error) {
-        console.log(error);
-    }
-}
+//         const transaction = await signer.signAndExecuteTransactionBlock({
+//             transactionBlock: tx,
+//             options: {
+//                 showInput: true,
+//                 showEffects: true,
+//                 showEvents: true,
+//                 showObjectChanges: true,
+//             }
+//         });
+
+//         console.log("DGT resp: ", transaction);
+//         return transaction.transaction.data.transaction.inputs
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 exports.subscribe = async(req, res, next) =>{
     let user_info = {
@@ -179,6 +181,7 @@ exports.vault_allocation = async(req, res, next)=>{
         "price": "1348$",
         "holding_value":"368000$",
         "amount_raised":"45%",
+        "package":"dgt_low_risk",
         "assets":[
             {
                 "asset": "Stacks",
@@ -232,4 +235,10 @@ exports.user_tracker = async(req, res, next)=>{
     ]
 
     res.json(user_tracker)
+}
+
+exports.sub_deposit_event = async(req, res, next) =>{
+    //making connection + 
+    const event_resp = await sui_monitor.emit_investor_deposit()
+    res.json(event_resp)
 }
