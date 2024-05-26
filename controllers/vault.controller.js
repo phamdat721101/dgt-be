@@ -32,7 +32,7 @@ exports.list_vault = async(req, res, next) =>{
             "des":"DigiTrust ecosystem",
             "timestamp":2424,
             "chain":"EVM",
-            "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
+            // "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
         },
         {
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/ton_7768.png",
@@ -48,7 +48,7 @@ exports.list_vault = async(req, res, next) =>{
             "des":"DigiTrust ecosystem",
             "timestamp":2424,
             "chain":"EVM",
-            "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
+            // "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
         },
         {
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/pepe_9753.png",
@@ -64,7 +64,7 @@ exports.list_vault = async(req, res, next) =>{
             "des":"DigiTrust ecosystem",
             "timestamp":2424,
             "chain":"EVM",
-            "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
+            // "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
         }
     ]
 
