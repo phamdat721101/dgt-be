@@ -363,7 +363,7 @@ app.get('/vaults', async (req, res) => {
     let resp = [{
         "vault_name": "dgt1",
         "manager": "dgt_manager",
-        "vault_desc": "making profit",
+        "vault_desc": "",
         "vault_adr": "0x312ms824234",
         "return":24,
         "assets":["CETUS", "SUI", "SUILIEN"],
@@ -381,7 +381,7 @@ app.get('/top_vaults', async (req, res) => {
             {
                 "vault_name": "dgt1",
                 "manager": "dgt_manager",
-                "vault_desc": "making profit",
+                "vault_desc": "",
                 "vault_adr": "0x312ms824234",
                 "return":24
             },

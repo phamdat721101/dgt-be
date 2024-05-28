@@ -81,7 +81,7 @@ exports.information = async (req, res, next) => {
                 "vault_name": "dgt_info_1",
                 "manager": "dgt_manager",
                 "logo":"http://localhost:3000/image/logo",
-                "vault_desc": "making profit",
+                "vault_desc": "",
                 "vault_adr": "0x312ms824234",
                 "return":24,
                 "assets":["CETUS", "SUI", "SUILIEN"],
