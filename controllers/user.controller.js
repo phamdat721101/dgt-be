@@ -195,7 +195,8 @@ exports.vault_allocation = async(req, res, next)=>{
                     "24h":"5.5",                
                 },
                 "dgt_score": 8,
-                "status":true
+                "status":true,
+                "url":"stx"
             },
             {
                 "asset": "Merlin stack",
@@ -209,7 +210,8 @@ exports.vault_allocation = async(req, res, next)=>{
                     "24h":"6.5",                
                 },
                 "dgt_score": 8,
-                "status":true
+                "status":true,
+                "url":"uma"
             }
         ]
     }
