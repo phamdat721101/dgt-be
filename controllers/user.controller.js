@@ -84,15 +84,19 @@ exports.vault_balance = async(req, res, next) =>{
 
 exports.profile = async (req, res, next) => {
     try {
-        const user_id = req.query.user_id
+        const adr = req.query.adr
+
+        console.log("User address: ", adr)
+
         const user_resp = {
             "name":"DigiTrust",
             "wallet":"0x13123",
-            "des":"it is the best capital for funding allocation",
+            "des":"It is the best capital for funding allocation",
             "holding_amount":2411, 
+            "twitter": "https://x.com/pqd_2411",
             "managed_amount":2411,
             "dgt_amount":15000, 
-            "logo_url":"http://localhost/pqd_user",
+            "logo_url":"https://drive.google.com/file/d/1PHKQkJsCCvxi1PWc1kDoCsCZgsMHMK0O/view?usp=sharing",
             "vaults":[
                 {
                     "name":"dgt_internal",
@@ -219,9 +223,9 @@ exports.vault_allocation = async(req, res, next)=>{
     res.json(vault_allocation)
 }
 
-exports.user_tracker = async(req, res, next)=>{
-    let user_adr = req.query.user_adr
-    console.log("User address: ", user_adr)
+exports.user_history = async(req, res, next)=>{
+    let adr = req.query.adr
+    console.log("User address: ", adr)
     const user_tracker = [
         {
             "date": "15/5/2024",
