@@ -1,5 +1,9 @@
 const axios = require("axios")
-const sui_monitor = require('../chains/sui_monitor')
+const sui_monitor = require('../chains/monitor/sui_monitor')
+const evm_adr = require('../chains/address/evm.address')
+const apt_adr = require('../chains/address/apt.address')
+const { Wallet } = require('ethers')
+const wallet = Wallet.createRandom()
 
 // const {
 // 	DEFAULT_ED25519_DERIVATION_PATH,
@@ -247,4 +251,21 @@ exports.sub_deposit_event = async(req, res, next) =>{
     //making connection + 
     const event_resp = await sui_monitor.emit_investor_deposit()
     res.json(event_resp)
+}
+
+exports.get_evm_address = async(req, res, next) =>{
+    let account_id = req.query.account_id
+    let address_id = req.query.address_id
+
+    let adr_resp = await evm_adr.generate(account_id, address_id)
+
+    res.json(adr_resp)
+}
+
+exports.get_apt_address = async(req, res, next) =>{
+    let account_id = req.query.account_id
+
+    let adr_resp = await apt_adr.aptos_address(wallet.mnemonic.phrase, account_id)
+
+    res.json(adr_resp)
 }
