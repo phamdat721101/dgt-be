@@ -8,6 +8,7 @@ const user = require('./routes/user.route')
 const vault = require('./routes/vault.route')
 const investment = require('./routes/investment.route')
 const asset = require('./routes/asset.route')
+const token = require('./routes/token.route')
 
 const vault_generator = require('./services/history');
 
@@ -37,6 +38,7 @@ app.use('/v1', user)
 app.use('/v1', vault)
 app.use('/v1', investment)
 app.use('/v1', asset)
+app.use('/v1', token)
 
 app.get('/', async (req, res) => {
     // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
