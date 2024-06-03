@@ -184,49 +184,6 @@ exports.user_history = async(req, res, next)=>{
     res.json(user_history)
 }
 
-exports.vault_allocation = async(req, res, next)=>{
-    const vault_allocation = {
-        "price": "1348$",
-        "holding_value":"368000$",
-        "amount_raised":"45%",
-        "package":"dgt_low_risk",
-        "assets":[
-            {
-                "asset": "Stacks",
-                "symbol": "STX",
-                "contract": "0x138234234",
-                "chain": "btc layer-2",
-                "invest_amount":2411, 
-                "weight":"18%", 
-                "holding":"1348$",
-                "price_change":{
-                    "24h":"5.5",                
-                },
-                "dgt_score": 8,
-                "status":true,
-                "url":"stx"
-            },
-            {
-                "asset": "Merlin stack",
-                "symbol": "MRL",
-                "contract": "0x138234234",
-                "chain": "btc layer-2",
-                "invest_amount":2411, 
-                "weight":"8%", 
-                "holding":"1348$",
-                "price_change":{
-                    "24h":"6.5",                
-                },
-                "dgt_score": 8,
-                "status":true,
-                "url":"uma"
-            }
-        ]
-    }
-
-    res.json(vault_allocation)
-}
-
 exports.user_history = async(req, res, next)=>{
     let adr = req.query.adr
     console.log("User address: ", adr)

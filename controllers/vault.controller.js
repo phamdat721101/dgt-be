@@ -6,7 +6,7 @@ exports.list_vault = async(req, res, next) =>{
             "asset":[
                 "https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
             ],
-            "vault_name":"aHYPE",
+            "vault_name":"Native vault",
             "price":"1500$",
             "return":24,
             "tvl":2411942139,
@@ -21,7 +21,7 @@ exports.list_vault = async(req, res, next) =>{
         {
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/okb_887.png",
             "vault_id":"btcX",
-            "vault_name":"Bitcoin X",
+            "vault_name":"Meme vault",
             "symbol":"BTCX",
             "price":"67000$",
             "return":24,
@@ -37,27 +37,11 @@ exports.list_vault = async(req, res, next) =>{
         {
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/ton_7768.png",
             "vault_id":"polX",
-            "vault_name":"PolygonX",
+            "vault_name":"High risk",
             "symbol":"POLX",
             "price":"540$",
             "return":24,
             "tvl":2349310411,
-            "monthly_return":"24.32%",
-            "daily_return":"1.8%",
-            "manager":"Dgt invest",
-            "des":"DigiTrust ecosystem",
-            "timestamp":2424,
-            "chain":"EVM",
-            // "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
-        },
-        {
-            "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/pepe_9753.png",
-            "vault_id":"arbX",
-            "vault_name":"ArbitrumX",
-            "symbol":"ARBX",
-            "price":"108$",
-            "return":24,
-            "tvl":23429411,
             "monthly_return":"24.32%",
             "daily_return":"1.8%",
             "manager":"Dgt invest",
@@ -153,4 +137,47 @@ exports.signal_provider = async(req,res, next) =>{
         code: 0,
         data: signal_provider
     })
+}
+
+exports.vault_allocation = async(req, res, next)=>{
+    const vault_allocation = {
+        "price": "1348$",
+        "holding_value":"368000$",
+        "amount_raised":"45%",
+        "package":"dgt_low_risk",
+        "assets":[
+            {
+                "asset": "Stacks",
+                "symbol": "STX",
+                "contract": "0x138234234",
+                "chain": "btc layer-2",
+                "invest_amount":2411, 
+                "weight":"18%", 
+                "holding":"1348$",
+                "price_change":{
+                    "24h":"5.5",                
+                },
+                "dgt_score": 8,
+                "status":true,
+                "url":"stx"
+            },
+            {
+                "asset": "Merlin stack",
+                "symbol": "MRL",
+                "contract": "0x138234234",
+                "chain": "btc layer-2",
+                "invest_amount":2411, 
+                "weight":"8%", 
+                "holding":"1348$",
+                "price_change":{
+                    "24h":"6.5",                
+                },
+                "dgt_score": 8,
+                "status":true,
+                "url":"uma"
+            }
+        ]
+    }
+
+    res.json(vault_allocation)
 }
