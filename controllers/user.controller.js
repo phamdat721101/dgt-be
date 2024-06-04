@@ -3,6 +3,7 @@ const sui_monitor = require('../chains/monitor/sui_monitor')
 const evm_adr = require('../chains/address/evm.address')
 const apt_adr = require('../chains/address/apt.address')
 const { Wallet } = require('ethers')
+const { now } = require("mongoose")
 const wallet = Wallet.createRandom()
 
 // const {
@@ -198,6 +199,14 @@ exports.user_history = async(req, res, next)=>{
             "total_loss":"5%",
             "tx_hash":"0x13c414324",
             "exp_date": "15/8/2024"
+        },
+        {
+            "date": "7/6/204",
+            "manager": "DigiTrust",
+            "package": "Low-risk",
+            "return": "28$",
+            "tx_hash": "0x123",
+            "expire_date": "7/10/2024"
         }
     ]
 

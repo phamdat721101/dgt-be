@@ -10,9 +10,9 @@ const {provider} = require('../utils/provider')
 const web3 = new Web3(dgtCfg.providerUrl)
 
 Contract.setProvider(provider)
+const contract = new this.contractProvider(tokenAbi, tokenParams.tokenAddress)
 
 exports.mint_token = async(req) =>{
-    let contract = new this.contractProvider(tokenAbi, tokenParams.tokenAddress)
     try {
         let to_adr = '0x0D0Df554db5623Ba9A905D0bE4C6bAc48144841E'
         let amount =  2411
@@ -50,9 +50,12 @@ exports.user_balance = async(req,res, next) =>{
         email = "dgt@gmail.com"
     }
 
+    let receipt = await contract.methods.get_user_balance(email).call();
+    console.log("Transaction receipt: ", )
+
     const user_balance = {
         "user_email": email,
-        "amount":2411,
+        "amount":receipt,
     }
 
     res.json(user_balance)
