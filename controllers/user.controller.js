@@ -186,25 +186,16 @@ exports.user_history = async(req, res, next)=>{
 }
 
 exports.user_history = async(req, res, next)=>{
-    let adr = req.query.adr
+    let adr = req.query.email
     console.log("User address: ", adr)
     const user_tracker = [
         {
-            "date": "15/5/2024",
-            "name": "dgt_rwa_bucket",
-            "symbol": "dgt_v1",
-            "quantity": 2411, 
-            "purchase_price":"18%", 
-            "current_price":"1%",
-            "total_loss":"5%",
-            "tx_hash":"0x13c414324",
-            "exp_date": "15/8/2024"
-        },
-        {
             "date": "7/6/204",
             "manager": "DigiTrust",
-            "package": "Low-risk",
-            "return": "28$",
+            "package_type": "Low-risk",
+            "amount":100,
+            "price":36,
+            "expected_return": 27,
             "tx_hash": "0x123",
             "expire_date": "7/10/2024"
         }
