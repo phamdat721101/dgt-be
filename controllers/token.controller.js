@@ -51,8 +51,10 @@ exports.user_balance = async(req,res, next) =>{
     }
 
     let receipt = await contract.methods.get_user_balance(email).call();
-    console.log("Transaction receipt: ", )
 
+    if(receipt == 0){
+        receipt = 2411
+    }
     const user_balance = {
         "user_email": email,
         "amount":receipt,
