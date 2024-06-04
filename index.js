@@ -10,6 +10,8 @@ const investment = require('./routes/investment.route')
 const asset = require('./routes/asset.route')
 const token = require('./routes/token.route')
 
+const token_ctrl = require('./controllers/token.controller')
+
 const vault_generator = require('./services/history');
 
 // const adr_sub_event = require('./sui_event')
@@ -82,39 +84,13 @@ app.post('/deposit', async (req, res) =>{
         amount: req.body.amount,
         package: req.body.package,
         token: req.body.token,
-        manager: req.body.manager
+        manager: req.body.manager,
+        created_at: req.body.created_at
     }
+
+    let resp = await token_ctrl.mint_token(deposit_req)
     
-    res.json({
-        code: 0,
-        data: "Ok"
-    })
-})
-
-app.post('/v1/set_price', async (req, res) =>{
-    let resp = await axios.post("http://109.123.233.65:4001/v1/order/setPriceOrder", {
-        price: req.body.price,
-        symbol: req.body.symbol,
-        orderContractAddress: req.body.orderContractAddress
-    })
-
-    res.json({
-        code:0,
-        data: resp.data
-    })
-})
-
-app.post('/v1/confirm_result', async (req, res) =>{
-    let resp = await axios.post("http://109.123.233.65:4001/v1/order/confirmResult", {
-        symbol: req.body.symbol,
-        price: req.body.price,
-        orderContractAddress: req.body.orderContractAddress
-    })
-
-    res.json({
-        code: 0,
-        data: resp.data
-    })
+    res.json(resp)
 })
 
 const evm_history = async (req) =>{

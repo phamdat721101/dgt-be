@@ -51,6 +51,32 @@ module.exports = Object.freeze({
   aptosCfg:{
     hdPath            : `m/44'/637'/0'/0'/`,
   },
+  dgtCfg:{
+      name: 'dgt',
+      network: process.env.DGT_NETWORK || 'testnet',
+      contractOwnerPriv: process.env.DGT_CONTRACT_OWNER_PRIV || 'b5c03e290e78040b117c807f9389eb24b0a02f3005d98d901e9af63aee43ecb5',
+      contractOwnerAddr: process.env.DGT_CONTRACT_OWNER_ADDR || '0x0D0Df554db5623Ba9A905D0bE4C6bAc48144841E',
+      providerUrl: process.env.DGT_API_URL || 'https://api.baobab.klaytn.net:8651',
+      dgtTokenAddress: process.env.DGT_TOKEN_ADDRESS || '0xee42Cf6E3E575b5aBC2B3Ae760BA1AF2c05791df',
+      dgtWalletAddress: process.env.DGT_WALLET_ADDRESS || '0x0D0Df554db5623Ba9A905D0bE4C6bAc48144841E',
+      dgtVaultSignalAddress: process.env.DGT_VAULT_SIGNAL_ADDRESS || '0xA39C2b7957496d28Cd6B3fD005b4A1584Abe0c30',
+      dgtAdminAddress: process.env.DGT_ADMIN_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
+      dgtAdminPriv: process.env.DGT_ADMIN_PRIV || '6ee44874d355c054c138a417c5a725cccf7353460892125e028e60ebc8c77129',
+      dgtChallengeAddress: process.env.DGT_CHALLENGE_ADDRESS || '0x24F3F152Bfb4C6C14e7c09053eDef984C2Fc5709',
+      gasPrice: process.env.DGT_GAS_PRICE
+  },
+  dgtPriceURL: process.env.DGT_PRICE_URL || "https://dgt-dbank-monitor-api.dgt-dbank-monitor-dev.vncdevs.com/hook/mt5_pricings/price?symbol=",
+  tokenParams:{
+    tokenAddress: process.env.DGT_TOKEN || '0x8Dc5B2Ccb8F325898832129e5507237268d561A8',
+    owner    : process.env.DGT_TOKEN_OWNER || '0x90de83fd2cd4d01660cd6909692568a14661cdf1',
+    gasPrice: 25000000000,
+    gasLimit: 8500000,
+  },
+  vaultSignalParams:{
+    from: process.env.DGT_ADMIN_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
+    gasPrice: 25000000000,
+    gasLimit: 8500000,
+  },
   evmCfg:{
     name: 'klaytn',
     symbol            : 'KLAY',
