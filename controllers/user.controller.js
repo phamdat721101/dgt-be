@@ -190,7 +190,7 @@ exports.user_history = async(req, res, next)=>{
     console.log("User address: ", adr)
     const user_tracker = [
         {
-            "date": "7/6/204",
+            "date": "7/6/2024",
             "manager": "DigiTrust",
             "package_type": "Low-risk",
             "amount":100,
