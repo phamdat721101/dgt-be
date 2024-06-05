@@ -75,7 +75,11 @@ exports.signal_provider = async(req,res, next) =>{
 }
 
 exports.vault_allocation = async(req, res, next)=>{
-    const vault_allocation = await vault.portfolio_structure()
+    let vault_req = {
+        chain: req.query.chain, 
+        pool: req.query.pool  
+    }
+    const vault_allocation = await vault.portfolio_structure(vault_req)
     console.log("Allocation: ", vault_allocation)
 
     res.json(vault_allocation)

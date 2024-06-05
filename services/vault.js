@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 exports.list_vault = async (data) =>{
     let vaults = [
         {
@@ -56,6 +58,13 @@ exports.list_vault = async (data) =>{
 }
 
 exports.portfolio_structure = async (data) =>{
+    let url = 'https://api.dexscreener.com/latest/dex/pairs'
+    let chain = data.chain || 'ton'
+    let pool = data.pool || 'EQBCwe_IObXA4Mt3RbcHil2s4-v4YQS3wUDt1-DvZOceeMGO'
+    let asset_info = await axios.get(`${url}/${chain}/${pool}`)
+
+    console.log("Asset info: ", asset_info)
+
     let structure = {
         "price": "1348$",
         "vault_id":"finX",
@@ -65,11 +74,11 @@ exports.portfolio_structure = async (data) =>{
         "package":"dgt_low_risk",
         "assets":[
             {
-                "asset": "Stacks",
-                "symbol": "STX",
+                "asset": "NOT coin",
+                "symbol": "NOT",
                 "contract": "0x138234234",
                 "chain": "btc layer-2",
-                "invest_amount":2411, 
+                "invest_amount":10, 
                 "weight":"18%", 
                 "holding":"1348$",
                 "price_change":{
@@ -77,14 +86,14 @@ exports.portfolio_structure = async (data) =>{
                 },
                 "dgt_score": 8,
                 "status":true,
-                "url":"stx"
+                "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png"
             },
             {
-                "asset": "Merlin stack",
-                "symbol": "MRL",
+                "asset": "Resistance DOG",
+                "symbol": "REDO",
                 "contract": "0x138234234",
                 "chain": "btc layer-2",
-                "invest_amount":2411, 
+                "invest_amount":90, 
                 "weight":"8%", 
                 "holding":"1348$",
                 "price_change":{
@@ -92,7 +101,7 @@ exports.portfolio_structure = async (data) =>{
                 },
                 "dgt_score": 8,
                 "status":true,
-                "url":"uma"
+                "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png"
             }
         ]
     }

@@ -1,6 +1,8 @@
 const Web3 = require('web3');
 const Contract = require('web3-eth-contract');
 const tokenAbi = require('../config/abi/dgt.json')
+const axios = require('axios');
+
 exports.contractProvider = require('web3-eth-contract');
 
 const {dgtCfg, tokenParams} = require('../config/vars')
@@ -64,17 +66,18 @@ exports.user_balance = async(req,res, next) =>{
 }
 
 exports.claim_token = async(req, res, next) =>{
-    let user_req = {
-        "receiver":req.body.receiver, 
-        "amount":1000, 
-        "created_at":req.body.created_at,
-        "email":req.body.email
-    }
-
-    let resp = {
-        "amount":1000,
-        "status": 200
-    }
-
-    res.json(resp)
+        const scriptURLGet = "https://script.google.com/macros/s/AKfycbwpKywlfgvuc_P_6ZYtAArtiKW9pgEmGuuKpmWOsqcAqQbG2C1My2kaV3eQkUdMicTK/exec"
+        const url = `${scriptURLGet}?email=${req.body.email}`;
+        const user_info = await axios.get(url);
+        let to_adr = user_info.data.wallet
+        let amount =  100
+        let user = req.body.email
+        let contract_params = {
+            from: '0x90de83fd2cd4d01660cd6909692568a14661cdf1',
+            gasPrice: 25000000000,
+            gasLimit: 8500000,
+        }
+        let receipt = await contract.methods.vault_transfer(to_adr, amount, user).send(Object.assign(contract_params));
+        console.log("Transaction receipt: ", receipt)
+        res.json(receipt)
 }
