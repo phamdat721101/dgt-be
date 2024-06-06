@@ -151,7 +151,7 @@ exports.user_history = async(req, res, next)=>{
             "price":36,
             "expected_return": 27,
             "tx_hash": "0x123",
-            "expire_date": "7/10/2024"
+            "expire_date": "9/10/2024"
         }
     ]
 
