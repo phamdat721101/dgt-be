@@ -155,7 +155,7 @@ exports.vault_detail = async (data) =>{
         }
     ]
 
-    if(data.)
+    // if(data.)
 
     return vault_detail
 }
