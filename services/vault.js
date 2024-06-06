@@ -10,10 +10,10 @@ const web3 = new Web3(dgtCfg.providerUrl)
 
 Contract.setProvider(provider)
 
-exports.get_vault_return = async (data) =>{
+exports.get_vault_return = async (vault_id) =>{
     let contract = new Contract(vault_abi, vaultParams.dgtVaultAddres)
     try {
-        let receipt = await contract.methods.get_return(1).call()
+        let receipt = await contract.methods.get_return(vault_id).call()
         console.log("Return info: ", receipt)
         return receipt
     } catch (err) {
@@ -26,7 +26,7 @@ exports.get_vault_return = async (data) =>{
 exports.list_vault = async (data) =>{
     let vaults = [
         {
-            "vault_id":"finX",
+            "vault_id":0,
             "symbol":"N-DGT",
             "asset":[
                 "https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
@@ -45,7 +45,7 @@ exports.list_vault = async (data) =>{
         },
         {
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/okb_887.png",
-            "vault_id":"btcX",
+            "vault_id":1,
             "vault_name":"Meme vault",
             "symbol":"M-DGT",
             "price":"67000$",
@@ -61,7 +61,7 @@ exports.list_vault = async (data) =>{
         },
         {
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/ton_7768.png",
-            "vault_id":"polX",
+            "vault_id":2,
             "vault_name":"High risk",
             "symbol":"H-DGT",
             "price":"540$",
@@ -133,8 +133,8 @@ exports.portfolio_structure = async (data) =>{
     return structure
 }
 
-exports.vault_detail = async (data) =>{
-    let vault_return = await this.get_vault_return()
+exports.vault_detail = async (vault_id) =>{
+    let vault_return = await this.get_vault_return(vault_id)
 
     let vault_detail = [
         {
@@ -143,7 +143,7 @@ exports.vault_detail = async (data) =>{
             "manager": "dgt_manager",
             "logo":"http://localhost:3000/image/logo",
             "vault_desc": "",
-            "vault_adr": "0x312ms824234",
+            "vault_adr": vaultParams.dgtVaultAddres,
             "return":vault_return,
             "assets":["CETUS", "SUI", "SUILIEN"],
             "created_at":1231,
