@@ -103,7 +103,7 @@ exports.portfolio_structure = async (data) =>{
                 "contract": "0x138234234",
                 "chain": "btc layer-2",
                 "invest_amount":10, 
-                "weight":"18%", 
+                "weight":"67.4%", 
                 "holding":"1348$",
                 "price_change":{
                     "24h":"5.5",                
@@ -118,8 +118,8 @@ exports.portfolio_structure = async (data) =>{
                 "contract": "0x138234234",
                 "chain": "btc layer-2",
                 "invest_amount":90, 
-                "weight":"8%", 
-                "holding":"1348$",
+                "weight":"32.6%", 
+                "holding":"652$",
                 "price_change":{
                     "24h":"6.5",                
                 },
