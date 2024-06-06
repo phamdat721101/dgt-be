@@ -10,8 +10,7 @@ exports.list_vault = async(req, res, next) =>{
 exports.information = async (req, res, next) => {
     try {
         let vault_id = req.query.vault_id
-        console.log("Vault id: ", vault_id)
-        const vault_info = await vault.vault_detail()
+        const vault_info = await vault.vault_detail(vault_id)
         res.json(vault_info);
     } catch (error) {
         console.log("Error to get user profile: ", error)
