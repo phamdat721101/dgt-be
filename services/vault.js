@@ -1,10 +1,33 @@
 const axios = require('axios');
+const Web3 = require('web3');
+const Contract = require('web3-eth-contract');
+const {dgtCfg, vaultParams} = require('../config/vars')
+const vault_abi = require('../config/abi/dgt_vault.json')
+const {provider} = require('../utils/provider')
+
+exports.contractProvider = require('web3-eth-contract');
+const web3 = new Web3(dgtCfg.providerUrl)
+
+Contract.setProvider(provider)
+
+exports.get_vault_return = async (data) =>{
+    let contract = new Contract(vault_abi, vaultParams.dgtVaultAddres)
+    try {
+        let receipt = await contract.methods.get_return(1).call()
+        console.log("Return info: ", receipt)
+        return receipt
+    } catch (err) {
+        console.log("Error get asset: ", err.message)
+        return err.message
+    }
+}
+
 
 exports.list_vault = async (data) =>{
     let vaults = [
         {
             "vault_id":"finX",
-            "symbol":"aHYPE",
+            "symbol":"N-DGT",
             "asset":[
                 "https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
             ],
@@ -24,7 +47,7 @@ exports.list_vault = async (data) =>{
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/okb_887.png",
             "vault_id":"btcX",
             "vault_name":"Meme vault",
-            "symbol":"BTCX",
+            "symbol":"M-DGT",
             "price":"67000$",
             "return":24,
             "tvl":24123411,
@@ -40,7 +63,7 @@ exports.list_vault = async (data) =>{
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/ton_7768.png",
             "vault_id":"polX",
             "vault_name":"High risk",
-            "symbol":"POLX",
+            "symbol":"H-DGT",
             "price":"540$",
             "return":24,
             "tvl":2349310411,
@@ -69,6 +92,7 @@ exports.portfolio_structure = async (data) =>{
         "price": "1348$",
         "vault_id":"finX",
         "vault_name":"High risk",
+        "vault_type":1,
         "holding_value":"368000$",
         "amount_raised":"45%",
         "package":"dgt_low_risk",
@@ -110,6 +134,8 @@ exports.portfolio_structure = async (data) =>{
 }
 
 exports.vault_detail = async (data) =>{
+    let vault_return = await this.get_vault_return()
+
     let vault_detail = [
         {
             "vault_id": "dgt1",
@@ -118,7 +144,7 @@ exports.vault_detail = async (data) =>{
             "logo":"http://localhost:3000/image/logo",
             "vault_desc": "",
             "vault_adr": "0x312ms824234",
-            "return":24,
+            "return":vault_return,
             "assets":["CETUS", "SUI", "SUILIEN"],
             "created_at":1231,
             "updated_at":12312,
@@ -128,6 +154,8 @@ exports.vault_detail = async (data) =>{
             "currency":"$"
         }
     ]
+
+    if(data.)
 
     return vault_detail
 }

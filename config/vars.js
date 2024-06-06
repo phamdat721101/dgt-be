@@ -59,7 +59,6 @@ module.exports = Object.freeze({
       providerUrl: process.env.DGT_API_URL || 'https://api.baobab.klaytn.net:8651',
       dgtTokenAddress: process.env.DGT_TOKEN_ADDRESS || '0xee42Cf6E3E575b5aBC2B3Ae760BA1AF2c05791df',
       dgtWalletAddress: process.env.DGT_WALLET_ADDRESS || '0x0D0Df554db5623Ba9A905D0bE4C6bAc48144841E',
-      dgtVaultSignalAddress: process.env.DGT_VAULT_SIGNAL_ADDRESS || '0xA39C2b7957496d28Cd6B3fD005b4A1584Abe0c30',
       dgtAdminAddress: process.env.DGT_ADMIN_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
       dgtAdminPriv: process.env.DGT_ADMIN_PRIV || '6ee44874d355c054c138a417c5a725cccf7353460892125e028e60ebc8c77129',
       dgtChallengeAddress: process.env.DGT_CHALLENGE_ADDRESS || '0x24F3F152Bfb4C6C14e7c09053eDef984C2Fc5709',
@@ -72,7 +71,8 @@ module.exports = Object.freeze({
     gasPrice: 25000000000,
     gasLimit: 8500000,
   },
-  vaultSignalParams:{
+  vaultParams:{
+    dgtVaultAddres: process.env.DGT_VAULT_ADDRESS || '0x7DF4d143f34203Bd670DB5162fA79b735ef1cE95',
     from: process.env.DGT_ADMIN_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
     gasPrice: 25000000000,
     gasLimit: 8500000,
