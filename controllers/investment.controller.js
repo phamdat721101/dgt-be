@@ -5,7 +5,7 @@ exports.user_investment = async (req, res, next) => {
         console.log("User_adr: ", user_adr)
         const user_invest = {
             "investment_id":"dgt_1",
-            "user_adr":"0x13123",
+            "user_adr":"pnha2411",
             "vault_id":"dgt",
             "amount":2411,
             "timestamp":24111998

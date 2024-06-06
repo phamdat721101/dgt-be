@@ -95,7 +95,7 @@ exports.profile = async (req, res, next) => {
 
         const user_resp = {
             "name":"DigiTrust",
-            "wallet":"0x13123",
+            "wallet":"pnha2411",
             "des":"It is the best capital for funding allocation",
             "holding_amount":2411, 
             "twitter": "https://x.com/pqd_2411",
