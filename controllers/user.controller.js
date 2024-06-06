@@ -5,6 +5,7 @@ const apt_adr = require('../chains/address/apt.address')
 const { Wallet } = require('ethers')
 const { now } = require("mongoose")
 const wallet = Wallet.createRandom()
+const vaults = require('../services/vault')
 
 // const {
 // 	DEFAULT_ED25519_DERIVATION_PATH,
@@ -89,65 +90,18 @@ exports.vault_balance = async(req, res, next) =>{
 
 exports.profile = async (req, res, next) => {
     try {
-        const adr = req.query.adr
-
-        console.log("User address: ", adr)
+        const user_email = req.query.email
 
         const user_resp = {
             "name":"DigiTrust",
             "wallet":"pnha2411",
             "des":"It is the best capital for funding allocation",
-            "holding_amount":2411, 
+            "holding_amount":100, 
             "twitter": "https://x.com/pqd_2411",
             "managed_amount":2411,
-            "dgt_amount":15000, 
+            "dgt_amount":100, 
             "logo_url":"https://drive.google.com/file/d/1PHKQkJsCCvxi1PWc1kDoCsCZgsMHMK0O/view?usp=sharing",
-            "vaults":[
-                {
-                    "name":"dgt_internal",
-                    "balance":2411, 
-                    "list_price":"1306",
-                    "current_price":"30.21",
-                    "manager":"pqd capital",
-                    "tvl":24111306,
-                    "monthly_return":"24.11",
-                    "daily_return":"2.4",
-                    "logo_url":"http://localhost/dgt_internal"
-                },
-                {
-                    "name":"cetus_internal",
-                    "balance":2411, 
-                    "list_price":"1306",
-                    "current_price":"30.21",
-                    "manager":"cetus capital",
-                    "tvl":24111306,
-                    "monthly_return":"24.11",
-                    "daily_return":"2.4",
-                    "logo_url":"http://localhost/dgt_internal"
-                },
-                {
-                    "name":"cetus_internal",
-                    "balance":2411, 
-                    "list_price":"1306",
-                    "current_price":"30.21",
-                    "manager":"cetus capital",
-                    "tvl":24111306,
-                    "monthly_return":"24.11",
-                    "daily_return":"2.4",
-                    "logo_url":"http://localhost/dgt_internal"
-                },
-                {
-                    "name":"aleo_internal",
-                    "balance":2411, 
-                    "list_price":"1306",
-                    "current_price":"30.21",
-                    "manager":"aleo capital",
-                    "tvl":24111306,
-                    "monthly_return":"24.11",
-                    "daily_return":"2.4",
-                    "logo_url":"http://localhost/dgt_internal"
-                }
-            ]
+            "vaults": vaults.list_vault()
         }
         res.json(user_resp);
     } catch (error) {
