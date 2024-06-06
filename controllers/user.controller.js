@@ -93,8 +93,8 @@ exports.profile = async (req, res, next) => {
         const user_email = req.query.email
 
         const user_resp = {
-            "name":"DigiTrust",
-            "wallet":"pnha2411",
+            "name":"Pnha2411",
+            "wallet":"0x7D...E95",
             "des":"It is the best capital for funding allocation",
             "holding_amount":100, 
             "twitter": "https://x.com/pqd_2411",
