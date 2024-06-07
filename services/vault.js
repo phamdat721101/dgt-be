@@ -12,14 +12,9 @@ Contract.setProvider(provider)
 
 exports.get_vault_return = async (vault_id) =>{
     let contract = new Contract(vault_abi, vaultParams.dgtVaultAddres)
-    try {
-        let receipt = await contract.methods.get_return(vault_id).call()
-        console.log("Return info: ", receipt)
-        return receipt
-    } catch (err) {
-        console.log("Error get asset: ", err.message)
-        return err.message
-    }
+    let receipt = await contract.methods.get_return(1).call()
+    console.log("Return info: ", receipt)
+    return receipt
 }
 
 
@@ -135,6 +130,9 @@ exports.portfolio_structure = async (data) =>{
 
 exports.vault_detail = async (vault_id) =>{
     let vault_return = await this.get_vault_return(vault_id)
+    if(!vault_return || vault_return == undefined){
+        vault_return = 18
+    }
 
     let vault_detail = [
         {
@@ -144,7 +142,7 @@ exports.vault_detail = async (vault_id) =>{
             "logo":"http://localhost:3000/image/logo",
             "vault_desc": "",
             "vault_adr": vaultParams.dgtVaultAddres,
-            "return":vault_return,
+            "return": vault_return,
             "assets":["CETUS", "SUI", "SUILIEN"],
             "created_at":1231,
             "updated_at":12312,
