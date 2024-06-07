@@ -136,7 +136,7 @@ exports.vault_detail = async (vault_id) =>{
 
     let vault_detail = [
         {
-            "vault_id": "dgt1",
+            "vault_id": 1,
             "vault_name": "dgt_info_1",
             "manager": "dgt_manager",
             "logo":"http://localhost:3000/image/logo",
@@ -146,9 +146,9 @@ exports.vault_detail = async (vault_id) =>{
             "assets":["CETUS", "SUI", "SUILIEN"],
             "created_at":1231,
             "updated_at":12312,
-            "tvl": 4907, 
+            "tvl": 2000, 
             "volume": 15,
-            "price": 241105,
+            "price": 24,
             "currency":"$"
         }
     ]
