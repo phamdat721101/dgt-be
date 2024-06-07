@@ -72,8 +72,8 @@ module.exports = Object.freeze({
     gasLimit: 8500000,
   },
   vaultParams:{
-    dgtVaultAddres: process.env.DGT_VAULT_ADDRESS || '0x7DF4d143f34203Bd670DB5162fA79b735ef1cE95',
-    from: process.env.DGT_ADMIN_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
+    dgtVaultAddres: process.env.DGT_VAULT_ADDRESS || '0x304A3B0f093D25c98159F87621C2e72F528831a0',
+    from: process.env.DGT_ADMIN_ADDRESS || '0x90de83fd2cd4d01660cd6909692568a14661cdf1',
     gasPrice: 25000000000,
     gasLimit: 8500000,
   },
