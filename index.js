@@ -9,6 +9,7 @@ const vault = require('./routes/vault.route')
 const investment = require('./routes/investment.route')
 const asset = require('./routes/asset.route')
 const token = require('./routes/token.route')
+const chain = require('./routes/chain.route')
 
 const token_ctrl = require('./controllers/token.controller')
 
@@ -41,6 +42,7 @@ app.use('/v1', vault)
 app.use('/v1', investment)
 app.use('/v1', asset)
 app.use('/v1', token)
+app.use('/v1', chain)
 
 app.get('/', async (req, res) => {
     // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')
