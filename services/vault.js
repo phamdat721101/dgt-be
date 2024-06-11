@@ -105,7 +105,8 @@ exports.portfolio_structure = async (data) =>{
                 },
                 "dgt_score": 8,
                 "status":true,
-                "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png"
+                "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png",
+                "asset_url": "https://app.dappflow.org/explorer/asset/3797/transactions"
             },
             {
                 "asset": "Resistance DOG",
@@ -120,7 +121,8 @@ exports.portfolio_structure = async (data) =>{
                 },
                 "dgt_score": 8,
                 "status":true,
-                "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png"
+                "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png",
+                "asset_url": "https://app.dappflow.org/explorer/asset/10984/transactions"
             }
         ]
     }

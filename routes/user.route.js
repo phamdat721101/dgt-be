@@ -12,5 +12,6 @@ router.route('/deposit_event').get(userCtrl.sub_deposit_event)
 /*---Get User address--*/
 router.route('/evm_adr').get(userCtrl.get_evm_address)
 router.route('/apt_adr').get(userCtrl.get_apt_address)
+router.route('/algo_adr').get(userCtrl.get_algo_address)
 
 module.exports = router

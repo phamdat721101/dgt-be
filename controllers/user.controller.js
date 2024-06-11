@@ -2,6 +2,8 @@ const axios = require("axios")
 const sui_monitor = require('../chains/monitor/sui_monitor')
 const evm_adr = require('../chains/address/evm.address')
 const apt_adr = require('../chains/address/apt.address')
+const algo_adr = require('../chains/address/algo.address')
+
 const { Wallet } = require('ethers')
 const { now } = require("mongoose")
 const wallet = Wallet.createRandom()
@@ -95,6 +97,7 @@ exports.profile = async (req, res, next) => {
         const user_resp = {
             "name":"Pnha2411",
             "wallet":"0x7D...E95",
+            "adr_url":"https://app.dappflow.org/explorer/account/I5ZVS5JQFRG4SBQPEYPP4UDTEMSMHXY6RO5BQ3GNTDKTFQWV3S7JXMYPCI/transactions",
             "des":"It is the best capital for funding allocation",
             "holding_amount":100, 
             "twitter": "https://x.com/pqd_2411",
@@ -177,6 +180,14 @@ exports.get_apt_address = async(req, res, next) =>{
     let account_id = req.query.account_id
 
     let adr_resp = await apt_adr.aptos_address(wallet.mnemonic.phrase, account_id)
+
+    res.json(adr_resp)
+}
+
+exports.get_algo_address = async(req, res, next) =>{
+    let account_id = req.query.account_id
+
+    let adr_resp = await algo_adr.createAddress()
 
     res.json(adr_resp)
 }
