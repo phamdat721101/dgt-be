@@ -83,3 +83,20 @@ exports.vault_allocation = async(req, res, next)=>{
 
     res.json(vault_allocation)
 }
+
+exports.list_token = async(req, res, next) =>{
+    let list_token = [
+        {
+            "logo":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png",
+            "price": "0.12",
+            "name":"dgt"         
+        },
+        {
+            "logo":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png",
+            "price": "0.12",
+            "name":"ton"         
+        }
+    ]
+
+    res.json(list_token)
+}

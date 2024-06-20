@@ -8,4 +8,6 @@ router.route('/vault_signal').get(vaultCtrl.public_signal)
 router.route('/vault_allocation').get(vaultCtrl.vault_allocation)
 router.route('/members').get(vaultCtrl.members)
 
+router.route('/list_token').get(vaultCtrl.list_token)
+
 module.exports = router
