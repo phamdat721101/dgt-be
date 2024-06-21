@@ -1,5 +1,6 @@
 const Contract = require('web3-eth-contract');
 const vault = require('../services/vault');
+const axios = require('axios')
 
 exports.list_vault = async(req, res, next) =>{
     const vaults = await vault.list_vault()
@@ -85,18 +86,34 @@ exports.vault_allocation = async(req, res, next)=>{
 }
 
 exports.list_token = async(req, res, next) =>{
-    let list_token = [
-        {
-            "logo":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png",
-            "price": "0.12",
-            "name":"dgt"         
+    let resp = await  axios.get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', {
+        headers: {
+          'X-CMC_PRO_API_KEY': 'c7bdec82-4291-460b-b7f1-b3dfacffc5ca',
         },
-        {
-            "logo":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png",
-            "price": "0.12",
-            "name":"ton"         
-        }
-    ]
+    });
 
-    res.json(list_token)
+    let list_token = resp.data.data
+    let tokens = []
+    for(let i = 0; i < list_token.length; i++){
+        let token_id = list_token[i].id
+        let token_info = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id='+token_id, {
+            headers: {
+              'X-CMC_PRO_API_KEY': 'c7bdec82-4291-460b-b7f1-b3dfacffc5ca',
+            },
+        });
+        // console.log("Token info: ", token_info.data)
+        let token = {
+            "id": list_token[i].id,
+            "name": list_token[i].name,
+            "symbol": list_token[i].symbol,
+            "price": list_token[i].quote.USD.price,
+            "logo_url":token_info.data.data[token_id].logo
+        }
+        tokens.push(token)
+        if( i > 9){
+            break
+        }
+    }
+
+    res.json(tokens)
 }
