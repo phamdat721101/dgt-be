@@ -9,5 +9,6 @@ router.route('/vault_allocation').get(vaultCtrl.vault_allocation)
 router.route('/members').get(vaultCtrl.members)
 
 router.route('/list_token').get(vaultCtrl.list_token)
+router.route('/create_vault').post(vaultCtrl.create_vault)
 
 module.exports = router

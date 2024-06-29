@@ -117,3 +117,24 @@ exports.list_token = async(req, res, next) =>{
 
     res.json(tokens)
 }
+
+exports.create_vault = async(req, res, next) =>{
+    let vault = {
+        "manager": req.body.manager,
+        "vault_symbol": req.body.vault_symbol,
+        "symbols": req.body.symbols, //notice array
+        "token_adrs": req.body.token_adrs, //notice array
+        "created_at": req.body.created_at,
+        "end_at": req.body.end_at,
+        "manage_fee": req.body.manage_fee
+    }
+
+    let resp = {
+        "status":"ok",
+        "tx_hash":"0x29ad2c212d488faf556bd307be1aa5df0532d87399dd096545c71fd9992f4226",
+        "contract": "0xa42b1378D1A84b153eB3e3838aE62870A67a40EA",
+        "from": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+    }
+
+    res.json(resp)
+}
