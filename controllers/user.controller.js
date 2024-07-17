@@ -8,60 +8,35 @@ const { Wallet } = require('ethers')
 const { now } = require("mongoose")
 const wallet = Wallet.createRandom()
 const vaults = require('../services/vault')
+const { User } = require('../model/user')
 
-// const {
-// 	DEFAULT_ED25519_DERIVATION_PATH,
-// 	Ed25519Keypair,
-// 	JsonRpcProvider,
-// 	RawSigner,
-// 	devnetConnection,
-// 	TransactionBlock,
-//     toB64,
-//     fromExportedKeypair,
-//     testnetConnection
-// } = require('@mysten/sui.js/client');
-// const req = require('express/lib/request');
-// const provider = new JsonRpcProvider(testnetConnection);
-// const privkey = '0xbc59c0992aa183ca50134fb7734844f473f43428bddf6cc55c95bd87ede72ad2'
-// const privateKeyBytes = Uint8Array.from(Buffer.from(privkey.slice(2), "hex")); 
+exports.register = async(req, res, next) =>{
+    const user = new User(req.body)
+    console.log("PQD go there: ", user)
 
-// const keypair = fromExportedKeypair({
-//     schema: "ED25519",
-//     privateKey: toB64(privateKeyBytes)
-// });
+    if(!user || user == undefined){
+        res.json({
+            "Error":"DB connection error"
+        })
+        return 
+    }
 
-// const signer = new RawSigner(keypair, provider);
-// const PACKAGE_ID = '0x2f8a1bdc3977cc134bf7bac4699712009878c7bd8ef72d144325a5f032d1c8ef'
-// const TREASURY_ID = '0x5fa75f3cc2bae39c34310a13809c507e027933f4acf5b9e3c5129402d7af2bde'
+    let resp = user.save((err, doc) => {
+        if (err) return res.json({ success: false, err });
+        res.status(200).json({
+            success: true,
+            invesments: doc
+        });
+    })
 
-// async function subscribe_signal(data) {
-//     try {
-//         const tx = new TransactionBlock();
-//         await tx.moveCall({
-//             target: `${PACKAGE_ID}::dgt::mint`,
-//             arguments: [
-//                 tx.object("0x270875b1dbe6ad01ae1bf1ce0bf3e1526bbe32e9c879765cb6fed3ea4109d748"),
-//                 tx.pure("2411"),
-//                 tx.pure(data.wallet)
-//             ],
-//         });
+    if(!resp || resp == undefined){
+        resp = {
+            "error":"cannot connect to database"
+        }
+    }
 
-//         const transaction = await signer.signAndExecuteTransactionBlock({
-//             transactionBlock: tx,
-//             options: {
-//                 showInput: true,
-//                 showEffects: true,
-//                 showEvents: true,
-//                 showObjectChanges: true,
-//             }
-//         });
-
-//         console.log("DGT resp: ", transaction);
-//         return transaction.transaction.data.transaction.inputs
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+    res.json(resp)
+}
 
 exports.subscribe = async(req, res, next) =>{
     let user_info = {
@@ -122,24 +97,6 @@ exports.user_portfolio = async(req, res, next)=>{
     const portfolio = signal_info.data.pairs
 
     res.json(portfolio)
-}
-
-exports.user_history = async(req, res, next)=>{
-    const user_history = [
-        {
-            "date": "0x6123m",
-            "name": "dgt_rwa_bucket",
-            "type": "hedge",
-            "invest_amount":2411, 
-            "profit":"18%", 
-            "daily_loss":"1%",
-            "total_loss":"5%",
-            "dgt_score": 8,
-            "status":true
-        }
-    ]
-
-    res.json(user_history)
 }
 
 exports.user_history = async(req, res, next)=>{

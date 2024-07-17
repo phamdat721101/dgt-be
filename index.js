@@ -19,10 +19,30 @@ const vault_generator = require('./services/history');
 
 // adr_sub_event()
 
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect("mongodb://0.0.0.0:27017");
+const db_url = process.env.DB_URL || "mongodb://0.0.0.0:27017"
+// const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+mongoose.Promise = global.Promise;
+
+// mongoose.connect(db_url);
+// let conn = mongoose.connection;
+
+// conn.on("connected", function(){
+//     console.log("Mongoose connected to " + dbURI);
+// });
+
+// conn.on("error", function(err){
+//     console.log("Mongoose connection error" + err);
+// });
+
+// conn.on("disconnected", function(){
+//     console.log("Mongoose disconnected");
+// });
+
+// mongoose.connection.db.admin().command({ ping: 1 });
 
 // async function getData() {
 //     const url = 'http://localhost:4001/v1/status';
@@ -43,6 +63,18 @@ app.use('/v1', investment)
 app.use('/v1', asset)
 app.use('/v1', token)
 app.use('/v1', chain)
+
+// app.post("/api/investments", (req, res) => {
+//     const invesments = new Investment(req.body);
+  
+//     invesments.save((err, doc) => {
+//       if (err) return res.json({ success: false, err });
+//       res.status(200).json({
+//         success: true,
+//         invesments: doc
+//       });
+//     });
+// });
 
 app.get('/', async (req, res) => {
     // let resp = await axios.get('http://109.123.233.65:4001/v1/asset?assetAddress=0x23926749Faf9F9AB807e57010999e9f274390421')

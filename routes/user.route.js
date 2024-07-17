@@ -14,4 +14,6 @@ router.route('/evm_adr').get(userCtrl.get_evm_address)
 router.route('/apt_adr').get(userCtrl.get_apt_address)
 router.route('/algo_adr').get(userCtrl.get_algo_address)
 
+router.route("/register").post(userCtrl.register)
+
 module.exports = router
