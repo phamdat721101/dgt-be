@@ -1,6 +1,7 @@
 const Contract = require('web3-eth-contract');
 const vault = require('../services/vault');
 const axios = require('axios')
+const { Profile } = require('../model/profile')
 
 exports.list_vault = async(req, res, next) =>{
     const vaults = await vault.list_vault()
@@ -10,9 +11,9 @@ exports.list_vault = async(req, res, next) =>{
 
 exports.information = async (req, res, next) => {
     try {
-        let vault_id = req.query.vault_id
-        const vault_info = await vault.vault_detail(vault_id)
-        res.json(vault_info);
+        let profile_id = req.query.profile_id
+        const profile = await Profile.findOne({ profile_id: profile_id });
+        res.json(profile);
     } catch (error) {
         console.log("Error to get user profile: ", error)
         next(error);
@@ -119,22 +120,68 @@ exports.list_token = async(req, res, next) =>{
 }
 
 exports.create_vault = async(req, res, next) =>{
-    let vault = {
-        "manager": req.body.manager,
-        "vault_symbol": req.body.vault_symbol,
-        "symbols": req.body.symbols, //notice array
-        "token_adrs": req.body.token_adrs, //notice array
-        "created_at": req.body.created_at,
-        "end_at": req.body.end_at,
-        "manage_fee": req.body.manage_fee
-    }
+    const profile_req = {
+        profile_id: req.body.profile_id || "unique_profile_id_here",
+        username: req.body.username || "user_username_here",
+        email: req.body.email || "user_email_here",
+        bio: req.body.bio || "user_bio_here",
+        profile_picture_url: req.body.profile_picture_url || "profile_picture_url_here",
+        wallet_address: req.body.wallet_address || "wallet_address_here",
+        asset_portfolio: req.body.asset_portfolio || [
+          {
+            asset_id: "asset_id_here",
+            amount: 0,
+            asset_type: "asset_type_here"
+          }
+          // Additional assets can be added in the same format
+        ],
+        transaction_history: req.body.transaction_history || [
+          {
+            transaction_id: "transaction_id_here",
+            date: "transaction_date_here",
+            transaction_type: "transaction_type_here",
+            status: "transaction_status_here"
+          }
+          // Additional transactions can be added in the same format
+        ],
+        followers: req.body.followers || [
+          {
+            name: "follower_name_here"
+          }
+          // Additional followers can be added in the same format
+        ],
+        following: req.body.following || [
+          {
+            name: "following_name_here"
+          }
+          // Additional following can be added in the same format
+        ],
+        created_at: req.body.created_at || "timestamp_created_here",
+        updated_at: req.body.updated_at || "timestamp_updated_here"
+    };
 
-    let resp = {
-        "status":"ok",
-        "tx_hash":"0x29ad2c212d488faf556bd307be1aa5df0532d87399dd096545c71fd9992f4226",
-        "contract": "0xa42b1378D1A84b153eB3e3838aE62870A67a40EA",
-        "from": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+    let profile = new Profile(profile_req)
+
+    let resp = profile.save((err, doc) =>{
+        console.log("Saving resp: ", err, " -doc: ", doc)
+        if (err) return res.json({ success: false, err });
+        res.status(200).json({
+            success: true,
+            profile: doc
+        });
+    })
+
+    if(!resp || resp == undefined){
+        resp = {
+            "error":"DB connection error"
+        }
     }
+    console.log("Resp: ", resp)
 
     res.json(resp)
+    // if(!resp || resp == undefined){
+    //     resp = {
+    //         "Error":"DB connection error"
+    //     }
+    // }
 }

@@ -1,7 +1,7 @@
 const { type } = require("express/lib/response");
 const mongoose = require("mongoose");
 const profileSchema = mongoose.Schema({
-    user_id: {
+    profile_id: {
       type: String,
       description: "Unique identifier for the user profile.",
       unique: true

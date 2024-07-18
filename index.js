@@ -31,7 +31,7 @@ mongoose.Promise = global.Promise;
 // let conn = mongoose.connection;
 
 // conn.on("connected", function(){
-//     console.log("Mongoose connected to " + dbURI);
+//     console.log("Mongoose connected to " + db_url);
 // });
 
 // conn.on("error", function(err){
