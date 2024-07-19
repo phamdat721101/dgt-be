@@ -123,6 +123,7 @@ exports.create_vault = async(req, res, next) =>{
     const profile_req = {
         profile_id: req.body.profile_id || "unique_profile_id_here",
         username: req.body.username || "user_username_here",
+        management_fee: req.body.management_fee || "0.3",
         email: req.body.email || "user_email_here",
         bio: req.body.bio || "user_bio_here",
         profile_picture_url: req.body.profile_picture_url || "profile_picture_url_here",
@@ -163,7 +164,6 @@ exports.create_vault = async(req, res, next) =>{
     let profile = new Profile(profile_req)
 
     let resp = profile.save((err, doc) =>{
-        console.log("Saving resp: ", err, " -doc: ", doc)
         if (err) return res.json({ success: false, err });
         res.status(200).json({
             success: true,
@@ -179,9 +179,4 @@ exports.create_vault = async(req, res, next) =>{
     console.log("Resp: ", resp)
 
     res.json(resp)
-    // if(!resp || resp == undefined){
-    //     resp = {
-    //         "Error":"DB connection error"
-    //     }
-    // }
 }

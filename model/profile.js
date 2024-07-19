@@ -11,6 +11,9 @@ const profileSchema = mongoose.Schema({
       required: true,
       description: "Unique username chosen by the user.",
     },
+    management_fee:{
+        type: Number
+    },
     email: {
       type: String,
       required: true,
