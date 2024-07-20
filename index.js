@@ -22,10 +22,9 @@ const vault_generator = require('./services/history');
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const db_url = process.env.DB_URL || "mongodb://0.0.0.0:27017"
-// const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+// const db_url = process.env.DB_URL || "mongodb://0.0.0.0:27017"
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 // mongoose.connect(db_url);
 // let conn = mongoose.connection;
@@ -51,7 +50,7 @@ mongoose.Promise = global.Promise;
 //     console.log("PQD: ", jsonResponse);
 // } 
   
-// app.use(express.static('public'))
+app.use(express.static('public'))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({

@@ -9,6 +9,31 @@ const { now } = require("mongoose")
 const wallet = Wallet.createRandom()
 const vaults = require('../services/vault')
 const { User } = require('../model/user')
+const { Profile } = require('../model/profile')
+
+exports.follow_profile = async(req, res, next) =>{
+    const { profileId } = req.params;
+    const { followerName } = req.body;
+
+    try {
+        // Find the user profile to follow
+        const userProfile = await Profile.findOne({ profile_id: profileId });
+        if (!userProfile) {
+        return res.status(404).send({ message: 'User profile not found' });
+        }
+
+        // Add the follower to the user's followers list
+        userProfile.followers.push({ name: followerName });
+
+        // Save the updated user profile
+        await userProfile.save();
+
+        res.status(200).send({ message: 'Successfully followed the user', profile: userProfile });
+    } catch (error) {
+        console.error("Error following user:", error);
+        res.status(500).send({ message: 'Error following user', error });
+    }
+}
 
 exports.register = async(req, res, next) =>{
     const user = new User(req.body)

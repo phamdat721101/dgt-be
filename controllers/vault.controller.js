@@ -171,12 +171,12 @@ exports.create_vault = async(req, res, next) =>{
         });
     })
 
-    if(!resp || resp == undefined){
-        resp = {
-            "error":"DB connection error"
-        }
-    }
-    console.log("Resp: ", resp)
+    // if(!resp || resp == undefined){
+    //     resp = {
+    //         "error":"DB connection error"
+    //     }
+    // }
+    // console.log("Resp: ", resp)
 
-    res.json(resp)
+    // res.json(resp)
 }

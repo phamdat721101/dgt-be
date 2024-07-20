@@ -15,5 +15,6 @@ router.route('/apt_adr').get(userCtrl.get_apt_address)
 router.route('/algo_adr').get(userCtrl.get_algo_address)
 
 router.route("/register").post(userCtrl.register)
+router.route("/profile/:profileId/follow").post(userCtrl.follow_profile)
 
 module.exports = router
