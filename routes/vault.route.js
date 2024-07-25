@@ -10,5 +10,7 @@ router.route('/members').get(vaultCtrl.members)
 
 router.route('/list_token').get(vaultCtrl.list_token)
 router.route('/create_vault').post(vaultCtrl.create_vault)
+router.route('/profile/:profileId/assets').post(vaultCtrl.update_asset_structure)
+router.route('/profile/add_post').post(vaultCtrl.add_post)
 
 module.exports = router

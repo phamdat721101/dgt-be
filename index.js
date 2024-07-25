@@ -22,24 +22,24 @@ const vault_generator = require('./services/history');
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-// const db_url = process.env.DB_URL || "mongodb://0.0.0.0:27017"
+const db_url = process.env.DB_URL || "mongodb://0.0.0.0:27017"
 
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
-// mongoose.connect(db_url);
-// let conn = mongoose.connection;
+mongoose.connect(db_url);
+let conn = mongoose.connection;
 
-// conn.on("connected", function(){
-//     console.log("Mongoose connected to " + db_url);
-// });
+conn.on("connected", function(){
+    console.log("Mongoose connected to " + db_url);
+});
 
-// conn.on("error", function(err){
-//     console.log("Mongoose connection error" + err);
-// });
+conn.on("error", function(err){
+    console.log("Mongoose connection error" + err);
+});
 
-// conn.on("disconnected", function(){
-//     console.log("Mongoose disconnected");
-// });
+conn.on("disconnected", function(){
+    console.log("Mongoose disconnected");
+});
 
 // mongoose.connection.db.admin().command({ ping: 1 });
 

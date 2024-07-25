@@ -16,5 +16,6 @@ router.route('/algo_adr').get(userCtrl.get_algo_address)
 
 router.route("/register").post(userCtrl.register)
 router.route("/profile/:profileId/follow").post(userCtrl.follow_profile)
+router.route("/profile/:profileId/followers").get(userCtrl.get_list_follower)
 
 module.exports = router

@@ -11,6 +11,24 @@ const vaults = require('../services/vault')
 const { User } = require('../model/user')
 const { Profile } = require('../model/profile')
 
+exports.get_list_follower = async(req, res, next) =>{
+    const { profileId } = req.params;
+
+    try {
+        // Find the user profile by user_id
+        const userProfile = await Profile.findOne({ profile_id: profileId });
+        if (!userProfile) {
+        return res.status(404).send({ message: 'User profile not found' });
+        }
+
+        // Return the list of followers
+        res.status(200).send(userProfile.followers);
+    } catch (error) {
+        console.error("Error getting followers:", error);
+        res.status(500).send({ message: 'Error getting followers', error });
+    }
+}
+
 exports.follow_profile = async(req, res, next) =>{
     const { profileId } = req.params;
     const { followerName } = req.body;

@@ -3,6 +3,108 @@ const vault = require('../services/vault');
 const axios = require('axios')
 const { Profile } = require('../model/profile')
 
+exports.add_post = async(req, res, next) =>{
+    let resp = [
+        {
+            id:"1",
+            profile_id:"pn_v1",
+            userAvatar: "https://placehold.co/40x40",
+            userName: "@alvinichi",
+            postTime: "6h",
+            content: "Bitcoin start invest time",
+            bull: ["nhatlapross@gmail.com","nhatlapross1@gmail.com","nhatlapross2@gmail.com"],
+            bear: ["nhatlapross@gmail.com"],
+            share:["nhatlapross@gmail.com","nhatlapross1@gmail.com","nhatlapross2@gmail.com"],
+            listComment:[
+                {
+                    idComment:"1",
+                    mainComment:"Hello world",
+		    userName:"nhatlapross",
+                    listReply:[
+                        {
+                            idReply:"1",
+		            userName:"nhatlapross2",
+                            mainReply:"Hi World"
+                        }
+                    ]
+                },
+                {
+                    idComment:"2",
+		    userName:"nhatlapross2",
+                    mainComment:"I'm here",
+                    listReply:[
+                    ]
+                }
+            ]
+        },
+        {
+            id:"2",
+            profile_id:"pn_v1",
+            userAvatar: "https://placehold.co/40x40",
+            userName: "@marsivi",
+            postTime: "2h",
+            content: "Bitcoin ETH awsome",
+            bull: ["nhatlapross@gmail.com","nhatlapross1@gmail.com","nhatlapross2@gmail.com"],
+            bear: ["nhatlapross@gmail.com"],
+            share:["nhatlapross@gmail.com","nhatlapross1@gmail.com","nhatlapross2@gmail.com"],
+            listComment:[
+                {
+                    idComment:"1",
+		    userName:"nhatlapross2",
+                    mainComment:"Great",
+                    listReply:[
+                        {
+                            idReply:"1",
+		            userName:"nhatlapross2",
+                            mainReply:"Good Job!"
+                        },
+                        {
+                            idReply:"2",
+		            userName:"nhatlapross3",
+                            mainReply:"That's good!"
+                        },
+                    ]
+                }
+            ]
+        },
+    ]
+
+    res.json(resp)
+}
+
+exports.update_asset_structure = async(req, res, next) =>{
+    const { profileId } = req.params;
+    const { asset_id, amount, asset_type } = req.body;
+
+    try {
+        // Find the user profile by user_id
+        const userProfile = await Profile.findOne({ profile_id: profileId });
+        if (!userProfile) {
+            return res.status(404).send({ message: 'User profile not found' });
+        }
+
+        // Find the asset in the user's asset portfolio
+        const asset = userProfile.asset_portfolio.find(a => a.asset_id === asset_id);
+
+        if (asset) {
+            // Update existing asset
+            asset.amount = amount;
+            asset.asset_type = asset_type;
+        } else {
+            // Add new asset
+            userProfile.asset_portfolio.push({ asset_id, amount, asset_type });
+        }
+
+        // Save the updated user profile
+        await userProfile.save();
+
+        res.status(200).send({ message: 'Asset structure updated successfully', profile: userProfile });
+    } catch (error) {
+        console.error("Error updating asset structure:", error);
+        res.status(500).send({ message: 'Error updating asset structure', error });
+    }
+}
+
 exports.list_vault = async(req, res, next) =>{
     const vaults = await vault.list_vault()
 

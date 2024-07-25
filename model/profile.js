@@ -1,5 +1,18 @@
 const { type } = require("express/lib/response");
 const mongoose = require("mongoose");
+
+const commentSchema = mongoose.Schema({
+    commenter: { type: String, required: true },
+    comment: { type: String, required: true },
+    created_at: { type: Date, default: Date.now }
+});
+
+const postSchema = mongoose.Schema({
+    content: { type: String, required: true },
+    created_at: { type: Date, default: Date.now },
+    comments: [commentSchema]
+});
+
 const profileSchema = mongoose.Schema({
     profile_id: {
       type: String,
@@ -84,6 +97,7 @@ const profileSchema = mongoose.Schema({
             }
         }
     ],
+    posts: [postSchema],
     created_at: {
       type: Number,
       required: true,
