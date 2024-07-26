@@ -263,22 +263,19 @@ exports.create_vault = async(req, res, next) =>{
         updated_at: req.body.updated_at || "timestamp_updated_here"
     };
 
-    let profile = new Profile(profile_req)
+    // let profile = new Profile(profile_req)
 
-    let resp = profile.save((err, doc) =>{
-        if (err) return res.json({ success: false, err });
-        res.status(200).json({
-            success: true,
-            profile: doc
-        });
+    // let resp = profile.save((err, doc) =>{
+    //     if (err) return res.json({ success: false, err });
+    //     res.status(200).json({
+    //         success: true,
+    //         profile: doc
+    //     });
+    // })
+
+    res.json({
+        profile_id: req.body.profile_id || "unique_profile_id_here",
+        username: req.body.username || "user_username_here",
+        success: true
     })
-
-    // if(!resp || resp == undefined){
-    //     resp = {
-    //         "error":"DB connection error"
-    //     }
-    // }
-    // console.log("Resp: ", resp)
-
-    // res.json(resp)
 }
