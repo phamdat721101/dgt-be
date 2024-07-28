@@ -12,5 +12,9 @@ router.route('/list_token').get(vaultCtrl.list_token)
 router.route('/create_vault').post(vaultCtrl.create_vault)
 router.route('/profile/:profileId/assets').post(vaultCtrl.update_asset_structure)
 router.route('/profile/add_post').post(vaultCtrl.add_post)
+router.route('/profile/add_comment').post(vaultCtrl.add_comment)
+router.route('/profile/share_profile').post(vaultCtrl.share_profile)
+router.route('/profile/bear_id').post(vaultCtrl.bear_id)
+router.route('/profile/bull_id').post(vaultCtrl.bull_id)
 
 module.exports = router

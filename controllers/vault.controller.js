@@ -3,6 +3,204 @@ const vault = require('../services/vault');
 const axios = require('axios')
 const { Profile } = require('../model/profile')
 
+exports.share_profile = async(req, res, next) =>{
+    let resp = [
+        {
+            id: "post_12345",
+            profile_id: "pn_v1",
+            userAvatar: "https://example.com/avatar.jpg",
+            userName: "JohnDoe",
+            postTime: "2024-07-28T14:30:00Z",
+            content: "Excited to share the latest updates on DigiTrust!",
+            bull: ["user_1", "user_2", "user_3"],
+            bear: ["user_4", "user_5"],
+            share: ["JaneSmith", "MikeJohnson"],
+            listCommen: [
+              {
+                id: "comment_1",
+                profile_id: "pn_v1",
+                userAvatar: "https://example.com/commenter1.jpg",
+                userName: "JaneSmith",
+                postTime: "2024-07-28T15:00:00Z",
+                content: "Great update, looking forward to more!",
+                bull: ["user_6", "user_7"],
+                bear: ["user_8"],
+                share: ["JohnDoe"],
+                listComment: []
+              },
+              {
+                id: "comment_2",
+                profile_id: "pn_v1",
+                userAvatar: "https://example.com/commenter2.jpg",
+                userName: "MikeJohnson",
+                postTime: "2024-07-28T16:00:00Z",
+                content: "Can't wait to see how this evolves.",
+                bull: ["user_9"],
+                bear: ["user_10"],
+                share: ["JaneSmith"],
+                listComment: [
+                  {
+                    id: "reply_1",
+                    profile_id: "pn_v1",
+                    userAvatar: "https://example.com/replier1.jpg",
+                    userName: "AliceBrown",
+                    postTime: "2024-07-28T16:30:00Z",
+                    content: "Absolutely! This is just the beginning.",
+                    bull: ["user_11"],
+                    bear: ["user_12"],
+                    share: ["MikeJohnson"]
+                  }
+                ]
+              }
+            ]
+        }          
+    ]
+
+    res.json(resp)
+}
+
+exports.bear_id = async(req, res, next) =>{
+    let resp = [
+        {
+            id: "post_12345",
+            profile_id: "pn_v1",
+            userAvatar: "https://example.com/avatar.jpg",
+            userName: "JohnDoe",
+            postTime: "2024-07-28T14:30:00Z",
+            content: "Excited to share the latest updates on DigiTrust!",
+            bull: ["user_1", "user_2", "user_3"],
+            bear: ["JaneSmith", "MikeJohnson"],
+            share: ["user_6", "user_7"],
+            listComment: [
+              {
+                id: "comment_1",
+                profile_id: "pn_v1",
+                userAvatar: "https://example.com/commenter1.jpg",
+                userName: "JaneSmith",
+                postTime: "2024-07-28T15:00:00Z",
+                content: "Great update, looking forward to more!",
+                bull: ["user_8", "user_9"],
+                bear: ["JohnDoe"],
+                share: ["user_10"],
+                listComment: []
+              },
+              {
+                id: "comment_2",
+                profile_id: "pn_v1",
+                userAvatar: "https://example.com/commenter2.jpg",
+                userName: "MikeJohnson",
+                postTime: "2024-07-28T16:00:00Z",
+                content: "Can't wait to see how this evolves.",
+                bull: ["user_11"],
+                bear: ["JaneSmith"],
+                share: ["user_12"],
+                listComment: [
+                  {
+                    id: "reply_1",
+                    profile_id: "pn_v1",
+                    userAvatar: "https://example.com/replier1.jpg",
+                    userName: "AliceBrown",
+                    postTime: "2024-07-28T16:30:00Z",
+                    content: "Absolutely! This is just the beginning.",
+                    bull: ["user_13"],
+                    bear: ["MikeJohnson"],
+                    share: ["user_14"]
+                  }
+                ]
+              }
+            ]
+        }          
+    ]
+
+    res.json(resp)
+}
+
+exports.bull_id = async(req, res, next) =>{
+    let resp = [
+        {
+            id: "post_12345",
+            profile_id: "pn_v1",
+            userAvatar: "https://example.com/avatar.jpg",
+            userName: "JohnDoe",
+            postTime: "2024-07-28T14:30:00Z",
+            content: "Excited to share the latest updates on DigiTrust!",
+            bull: ["JaneSmith", "MikeJohnson", "AliceBrown"],
+            bear: ["DavidGreen", "EvaWhite"],
+            share: ["TomBlack", "NinaBlue"],
+            listComment: [
+              {
+                id: "comment_1",
+                profile_id: "pn_v1",
+                userAvatar: "https://example.com/commenter1.jpg",
+                userName: "JaneSmith",
+                postTime: "2024-07-28T15:00:00Z",
+                content: "Great update, looking forward to more!",
+                bull: ["JohnDoe", "MikeJohnson"],
+                bear: [],
+                share: ["AliceBrown"],
+                listComment: []
+              },
+              {
+                id: "comment_2",
+                profile_id: "pn_v1",
+                userAvatar: "https://example.com/commenter2.jpg",
+                userName: "MikeJohnson",
+                postTime: "2024-07-28T16:00:00Z",
+                content: "Can't wait to see how this evolves.",
+                bull: ["JaneSmith"],
+                bear: [],
+                share: [],
+                listComment: [
+                  {
+                    id: "reply_1",
+                    profile_id: "pn_v1",
+                    userAvatar: "https://example.com/replier1.jpg",
+                    userName: "AliceBrown",
+                    postTime: "2024-07-28T16:30:00Z",
+                    content: "Absolutely! This is just the beginning.",
+                    bull: ["JohnDoe"],
+                    bear: [],
+                    share: []
+                  }
+                ]
+              }
+            ]
+        }          
+    ]
+
+    res.json(resp)
+}
+
+exports.add_comment = async(req, res, next) =>{
+    let resp = [
+        {
+            id: "post_12345",
+            profile_id: "pn_v1",
+            userAvatar: "https://example.com/avatar.jpg",
+            userName: "JohnDoe",
+            postTime: "2024-07-28T14:30:00Z",
+            content: "Excited to share the latest updates on DigiTrust!",
+            bull: ["user_1", "user_2", "user_3"],
+            bear: ["user_4", "user_5"],
+            share: ["user_6", "user_7"],
+            listComment: [
+                {
+                    idComment: "comment_1",
+                    mainComment: "Great update, looking forward to more!",
+                    userName: "JaneSmith",
+                },
+                {
+                    idComment: "comment_2",
+                    mainComment: "Can't wait to see how this evolves.",
+                    userName: "MikeJohnson",
+                }
+            ]
+        }        
+    ]
+
+    res.json(resp)
+}
+
 exports.add_post = async(req, res, next) =>{
     let resp = [
         {
