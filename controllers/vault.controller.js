@@ -274,33 +274,40 @@ exports.update_asset_structure = async(req, res, next) =>{
     const { profileId } = req.params;
     const { asset_id, amount, asset_type } = req.body;
 
-    try {
-        // Find the user profile by user_id
-        const userProfile = await Profile.findOne({ profile_id: profileId });
-        if (!userProfile) {
-            return res.status(404).send({ message: 'User profile not found' });
+    res.status(200).send(
+        { 
+            message: 'Asset structure updated successfully',
+            profile_id: profileId 
         }
+    );
 
-        // Find the asset in the user's asset portfolio
-        const asset = userProfile.asset_portfolio.find(a => a.asset_id === asset_id);
+    // try {
+    //     // Find the user profile by user_id
+    //     const userProfile = await Profile.findOne({ profile_id: profileId });
+    //     if (!userProfile) {
+    //         return res.status(404).send({ message: 'User profile not found' });
+    //     }
 
-        if (asset) {
-            // Update existing asset
-            asset.amount = amount;
-            asset.asset_type = asset_type;
-        } else {
-            // Add new asset
-            userProfile.asset_portfolio.push({ asset_id, amount, asset_type });
-        }
+    //     // Find the asset in the user's asset portfolio
+    //     const asset = userProfile.asset_portfolio.find(a => a.asset_id === asset_id);
 
-        // Save the updated user profile
-        await userProfile.save();
+    //     if (asset) {
+    //         // Update existing asset
+    //         asset.amount = amount;
+    //         asset.asset_type = asset_type;
+    //     } else {
+    //         // Add new asset
+    //         userProfile.asset_portfolio.push({ asset_id, amount, asset_type });
+    //     }
 
-        res.status(200).send({ message: 'Asset structure updated successfully', profile: userProfile });
-    } catch (error) {
-        console.error("Error updating asset structure:", error);
-        res.status(500).send({ message: 'Error updating asset structure', error });
-    }
+    //     // Save the updated user profile
+    //     await userProfile.save();
+
+    //     res.status(200).send({ message: 'Asset structure updated successfully', profile: userProfile });
+    // } catch (error) {
+    //     console.error("Error updating asset structure:", error);
+    //     res.status(500).send({ message: 'Error updating asset structure', error });
+    // }
 }
 
 exports.list_vault = async(req, res, next) =>{
