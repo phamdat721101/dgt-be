@@ -30,6 +30,20 @@ exports.list_vault = async (data) =>{
             "price":"9$",
             "return":24,
             "tvl":2000,
+            "chain":[
+                {
+                    "name":"ton",
+                    "logo":"http://localhost:3000"
+                },
+                {
+                    "name":"sol",
+                    "logo":"http://localhost:3000"
+                },
+                {
+                    "name":"eth",
+                    "logo":"http://localhost:3000"
+                }
+            ],
             "monthly_return":"24.32%",
             "daily_return":"1.8%",
             "manager":"Dgt invest",
@@ -42,6 +56,20 @@ exports.list_vault = async (data) =>{
             "url":"https://xkqpczltzicnmbqvihbc.supabase.co/storage/v1/object/public/logos/okb_887.png",
             "vault_id":1,
             "vault_name":"Meme vault",
+            "chain":[
+                {
+                    "name":"base",
+                    "logo":"http://localhost:3000"
+                },
+                {
+                    "name":"sol",
+                    "logo":"http://localhost:3000"
+                },
+                {
+                    "name":"blasr",
+                    "logo":"http://localhost:3000"
+                }
+            ],
             "symbol":"M-DGT",
             "price":"18$",
             "return":24,
@@ -59,6 +87,20 @@ exports.list_vault = async (data) =>{
             "vault_id":2,
             "vault_name":"High risk",
             "symbol":"H-DGT",
+            "chain":[
+                {
+                    "name":"eth",
+                    "logo":"http://localhost:3000"
+                },
+                {
+                    "name":"bnb",
+                    "logo":"http://localhost:3000"
+                },
+                {
+                    "name":"ton",
+                    "logo":"http://localhost:3000"
+                }
+            ],
             "price":"27$",
             "return":24,
             "tvl":639,
