@@ -49,7 +49,6 @@ exports.list_vault = async (data) =>{
             "manager":"Dgt invest",
             "des":"DigiTrust ecosystem",
             "timestamp":2424,
-            "chain":"EVM",
             "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
         },
         {
@@ -79,7 +78,6 @@ exports.list_vault = async (data) =>{
             "manager":"Dgt invest",
             "des":"DigiTrust ecosystem",
             "timestamp":2424,
-            "chain":"EVM",
             // "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
         },
         {
@@ -109,7 +107,6 @@ exports.list_vault = async (data) =>{
             "manager":"Dgt invest",
             "des":"DigiTrust ecosystem",
             "timestamp":2424,
-            "chain":"EVM",
             // "url":"https://dd.dexscreener.com/ds-data/tokens/sui/0x76cb819b01abed502bee8a702b4c2d547532c12f25001c9dea795a5e631c26f1::fud::fud.png"
         }
     ]
