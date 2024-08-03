@@ -68,17 +68,9 @@ exports.register = async(req, res, next) =>{
         if (err) return res.json({ success: false, err });
         res.status(200).json({
             success: true,
-            invesments: doc
+            user: doc
         });
     })
-
-    if(!resp || resp == undefined){
-        resp = {
-            "error":"cannot connect to database"
-        }
-    }
-
-    res.json(resp)
 }
 
 exports.subscribe = async(req, res, next) =>{
@@ -121,8 +113,41 @@ exports.profile = async (req, res, next) => {
             "twitter": "https://x.com/pqd_2411",
             "managed_amount":2411,
             "dgt_amount":100, 
+            "assets":[
+                {
+                    "asset": "NOT coin",
+                    "symbol": "NOT",
+                    "contract": "0x138234234",
+                    "chain": "btc layer-2",
+                    "invest_amount":10, 
+                    "weight":"67.4%", 
+                    "holding":"1348$",
+                    "price_change":{
+                        "24h":"5.5",                
+                    },
+                    "dgt_score": 8,
+                    "status":true,
+                    "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png",
+                    "asset_url": "https://app.dappflow.org/explorer/asset/3797/transactions"
+                },
+                {
+                    "asset": "Resistance DOG",
+                    "symbol": "REDO",
+                    "contract": "0x138234234",
+                    "chain": "btc layer-2",
+                    "invest_amount":90, 
+                    "weight":"32.6%", 
+                    "holding":"652$",
+                    "price_change":{
+                        "24h":"6.5",                
+                    },
+                    "dgt_score": 8,
+                    "status":true,
+                    "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png",
+                    "asset_url": "https://app.dappflow.org/explorer/asset/10984/transactions"
+                }
+            ],
             "logo_url":"https://drive.google.com/file/d/1PHKQkJsCCvxi1PWc1kDoCsCZgsMHMK0O/view?usp=sharing",
-            "vaults": vaults.list_vault()
         }
         res.json(user_resp);
     } catch (error) {
