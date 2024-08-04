@@ -5,7 +5,6 @@ const apt_adr = require('../chains/address/apt.address')
 const algo_adr = require('../chains/address/algo.address')
 
 const { Wallet } = require('ethers')
-const { now } = require("mongoose")
 const wallet = Wallet.createRandom()
 const vaults = require('../services/vault')
 const { User } = require('../model/user')
@@ -143,13 +142,12 @@ exports.profile = async (req, res, next) => {
                     "price_change":{
                         "24h":"5.5",                
                     },
-                    "dgt_score": 8,
                     "status":true,
                     "total_usd":"1.67$",
                     "token_amount":"5000",
                     "price":"0.000059$",
                     "profit":"20%",
-                    "created_at": Date.now,
+                    "created_at": Date.now(),
                     "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png",
                     "asset_url": "https://app.dappflow.org/explorer/asset/3797/transactions"
                 },
@@ -170,7 +168,7 @@ exports.profile = async (req, res, next) => {
                     "token_amount":"2407",
                     "price":"0.000013259$",
                     "profit":"24.5%",
-                    "created_at": Date.now,
+                    "created_at": Date.now(),
                     "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png",
                     "asset_url": "https://app.dappflow.org/explorer/asset/10984/transactions"
                 }
