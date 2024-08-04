@@ -104,15 +104,33 @@ exports.profile = async (req, res, next) => {
     try {
         const user_email = req.query.email
 
+        const userProfile = await User.findOne({ email: user_email });
+
+        if(!userProfile || userProfile == undefined){
+            res.json("Error: invalid user")
+        }
+
         const user_resp = {
             "name":"Pnha2411",
             "wallet":"0x7D...E95",
             "adr_url":"https://app.dappflow.org/explorer/account/I5ZVS5JQFRG4SBQPEYPP4UDTEMSMHXY6RO5BQ3GNTDKTFQWV3S7JXMYPCI/transactions",
             "des":"It is the best capital for funding allocation",
-            "holding_amount":100, 
+            "balance":"54241$", 
             "twitter": "https://x.com/pqd_2411",
-            "managed_amount":2411,
-            "dgt_amount":100, 
+            "allTimeProfit":{
+                "amount": "323,4",
+                "profitloss": "3.4%",
+            },
+            "bestPerformer":{
+                "coinID":"sol_1",
+                "amount": "14.23",
+                "profitloss": "4.5%",
+            },
+            "worstPerformer":{
+                "coinID":"blas_v2",
+                "amount": "3.412",
+                "profitloss": "5.7%",
+            },
             "assets":[
                 {
                     "asset": "NOT coin",
@@ -127,6 +145,11 @@ exports.profile = async (req, res, next) => {
                     },
                     "dgt_score": 8,
                     "status":true,
+                    "total_usd":"1.67$",
+                    "token_amount":"5000",
+                    "price":"0.000059$",
+                    "profit":"20%",
+                    "created_at": Date.now,
                     "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqavlwfdxgf2lxm67y4yzc17wykd9a0guwpkms1gosm__not.png",
                     "asset_url": "https://app.dappflow.org/explorer/asset/3797/transactions"
                 },
@@ -143,6 +166,11 @@ exports.profile = async (req, res, next) => {
                     },
                     "dgt_score": 8,
                     "status":true,
+                    "total_usd":"24.7$",
+                    "token_amount":"2407",
+                    "price":"0.000013259$",
+                    "profit":"24.5%",
+                    "created_at": Date.now,
                     "logo_url":"https://dd.dexscreener.com/ds-data/tokens/ton/eqbz_cafpydr5kuts0anxh0ztdhkpezonmlja2sngllm4cko.png",
                     "asset_url": "https://app.dappflow.org/explorer/asset/10984/transactions"
                 }
