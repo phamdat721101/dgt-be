@@ -6,7 +6,7 @@ const vault_abi = require('../config/abi/dgt_vault.json')
 const {provider} = require('../utils/provider')
 
 exports.contractProvider = require('web3-eth-contract');
-const web3 = new Web3(dgtCfg.providerUrl)
+// const web3 = new Web3(dgtCfg.providerUrl)
 
 Contract.setProvider(provider)
 
