@@ -271,8 +271,8 @@ exports.add_post = async(req, res, next) =>{
 }
 
 exports.update_asset_structure = async(req, res, next) =>{
-    const { profileId } = req.params;
-    const { asset_id, amount, asset_type } = req.body;
+    // const { profileId } = req.params;
+    const { profile_id, asset_id, amount, asset_type } = req.body;
 
     // res.status(200).send(
     //     { 
@@ -283,7 +283,7 @@ exports.update_asset_structure = async(req, res, next) =>{
 
     try {
         // Find the user profile by user_id
-        const userProfile = await Profile.findOne({ profile_id: profileId });
+        const userProfile = await Profile.findOne({ profile_id: profile_id });
         if (!userProfile) {
             return res.status(404).send({ message: 'User profile not found' });
         }

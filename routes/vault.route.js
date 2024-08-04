@@ -10,7 +10,7 @@ router.route('/members').get(vaultCtrl.members)
 
 router.route('/list_token').get(vaultCtrl.list_token)
 router.route('/create_vault').post(vaultCtrl.create_vault)
-router.route('/profile/:profileId/assets').post(vaultCtrl.update_asset_structure)
+router.route('/profile/assets').post(vaultCtrl.update_asset_structure)
 router.route('/profile/post').post(vaultCtrl.add_post)
 router.route('/profile/comment').post(vaultCtrl.add_comment)
 router.route('/profile/share').post(vaultCtrl.share_profile)
