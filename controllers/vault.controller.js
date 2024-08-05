@@ -320,7 +320,10 @@ exports.information = async (req, res, next) => {
     try {
         let profile_id = req.query.profile_id
         const profile = await Profile.findOne({ profile_id: profile_id });
-        res.json(profile);
+        
+        const vault_detail = await vault.vault_detail()
+
+        res.json(vault_detail);
     } catch (error) {
         console.log("Error to get user profile: ", error)
         next(error);
