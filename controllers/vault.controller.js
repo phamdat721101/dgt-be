@@ -321,7 +321,7 @@ exports.information = async (req, res, next) => {
         let profile_id = req.query.profile_id
         const profile = await Profile.findOne({ profile_id: profile_id });
         
-        const vault_detail = await vault.vault_detail()
+        const vault_detail = await vault.portfolio_structure()
 
         res.json(vault_detail);
     } catch (error) {

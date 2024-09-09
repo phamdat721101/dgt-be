@@ -124,6 +124,7 @@ exports.portfolio_structure = async (data) =>{
 
     let structure = {
         "price": "1348$",
+        "profile_id": 1,
         "vault_id":"finX",
         "vault_name":"High risk",
         "vault_type":1,
