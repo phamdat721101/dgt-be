@@ -17,4 +17,6 @@ router.route('/profile/share').post(vaultCtrl.share_profile)
 router.route('/profile/bear').post(vaultCtrl.bear_id)
 router.route('/profile/bull').post(vaultCtrl.bull_id)
 
+router.route('/top_holders').get(vaultCtrl.top_holders)
+
 module.exports = router

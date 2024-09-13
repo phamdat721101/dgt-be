@@ -487,3 +487,55 @@ exports.create_vault = async(req, res, next) =>{
 //         success: true
 //     })
 }
+
+exports.top_holders = async(req, res, next) =>{
+    const chain = req.query.chain
+
+    if(chain == "ICP"){
+        res.json(
+            {
+                "topHolders": [
+                  {
+                    "address": "0xa1b2c3d4e5f678901234567890abcdef12345678",
+                    "amount": 4500,
+                    "percentage": 45
+                  },
+                  {
+                    "address": "0xabcdef1234567890fedcba098765432112345678",
+                    "amount": 3000,
+                    "percentage": 30
+                  },
+                  {
+                    "address": "0x1234567890abcdef1234567890abcdef98765432",
+                    "amount": 2500,
+                    "percentage": 25
+                  }
+                ],
+                "token": "ICP"
+              }              
+        )
+    }else{
+        res.json(
+            {
+                "topHolders": [
+                  {
+                    "address": "0xfeed1234deadbeef5678abcd1234ef5678abcd90",
+                    "amount": 5000,
+                    "percentage": 50
+                  },
+                  {
+                    "address": "0xdeadbeef56781234feedabcd5678ef1234abcd90",
+                    "amount": 3000,
+                    "percentage": 30
+                  },
+                  {
+                    "address": "0xabcd1234ef5678abcd5678feed1234deadbeef90",
+                    "amount": 2000,
+                    "percentage": 20
+                  }
+                ],
+                "token": "SUI"
+            }          
+        )
+    }
+}
