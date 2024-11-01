@@ -2,8 +2,7 @@ const ethereumjs = require("ethereumjs-util");
 const HDKey = require('hdkey');
 const { evmCfg } = require('../../config/vars');
 
-
-exports.generate = (accountIndex, addressId) => {
+exports.generate = async (accountIndex, addressId) => {
   try {
     let node = HDKey.fromExtendedKey(evmCfg.masterPubKey);
     let path = isNaN(addressId) ? evmCfg.hdPath + accountIndex : evmCfg.hdPath + accountIndex + '/' + addressId;
@@ -24,7 +23,7 @@ exports.generate = (accountIndex, addressId) => {
   }
 };
 
-exports.getPrivateKey = (path) => {
+exports.getPrivateKey = async (path) => {
   try {
     let node = HDKey.fromExtendedKey(evmCfg.masterPrivKey);
     let child = node.derive(path);

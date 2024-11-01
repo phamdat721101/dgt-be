@@ -56,7 +56,7 @@ module.exports = Object.freeze({
       network: process.env.DGT_NETWORK || 'testnet',
       contractOwnerPriv: process.env.DGT_CONTRACT_OWNER_PRIV || 'b5c03e290e78040b117c807f9389eb24b0a02f3005d98d901e9af63aee43ecb5',
       contractOwnerAddr: process.env.DGT_CONTRACT_OWNER_ADDR || '0x0D0Df554db5623Ba9A905D0bE4C6bAc48144841E',
-      providerUrl: process.env.DGT_API_URL || 'https://api.baobab.klaytn.net:8651',
+      providerUrl: process.env.DGT_API_URL || 'https://rpc-evm-sidechain.xrpl.org',
       dgtTokenAddress: process.env.DGT_TOKEN_ADDRESS || '0xee42Cf6E3E575b5aBC2B3Ae760BA1AF2c05791df',
       dgtWalletAddress: process.env.DGT_WALLET_ADDRESS || '0x0D0Df554db5623Ba9A905D0bE4C6bAc48144841E',
       dgtAdminAddress: process.env.DGT_ADMIN_ADDRESS || '0xF7FCCFc3DE0789362B5B998782992a27b12040c8',
