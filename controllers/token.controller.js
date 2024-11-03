@@ -101,17 +101,17 @@ exports.claim_token = async(req, res, next) =>{
     res.json(receipt)
 }
 
-exports.get_price = async(req, res, next) =>{
+exports.get_xau_price = async(req, res, next) =>{
     let link_contract = new Contract(link_abi, "0x1F954Dc24a49708C26E0C1777f16750B5C6d5a2c")
-    // Simulated response data for gold price
-    const simulatedGoldPriceData = {
-        price: 1800, // Example price in USD per ounce
-        timestamp: new Date().toISOString(),
-        currency: 'USD',
-        metal: 'XAU'
-    };
 
     let latestRoundId = await link_contract.methods.latestRound().call();
     let contract_resp = await link_contract.methods.getRoundData(latestRoundId).call();
-    res.json(contract_resp);
+
+    res.json({
+        roundId: contract_resp.roundId,
+        price: contract_resp.answer / 1e18, // Convert from wei to ether (assuming answer is in wei)
+        startedAt: contract_resp.startedAt,
+        updatedAt: contract_resp.updatedAt,
+        answeredInRound: contract_resp.answeredInRound
+    });
 }

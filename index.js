@@ -51,8 +51,15 @@ app.use(cors({
 // app.use('/v1', vault)
 // app.use('/v1', investment)
 // app.use('/v1', asset)
-app.use('/v1', token)
+app.use('/v1/token', token)
 // app.use('/v1', chain)
+
+app.get('/', async (req, res) => {
+    res.json({
+        code: 0,
+        data: "Ok"
+    })
+})
 
 app.listen(process.env.PORT || 3001, () =>{
     console.log("Listening at 3001")
