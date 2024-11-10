@@ -60,7 +60,7 @@ exports.get_tx_by_addr = async(req, res, next) =>{
         }
     });
 
-    let resp = response.data.items.map((item) =>{
+    let resp = response.data.items.map((item) =>{        
         return {
             tx_hash: item.hash,
             from: addr,
@@ -68,6 +68,20 @@ exports.get_tx_by_addr = async(req, res, next) =>{
             timestamp: item.timestamp
         }
     })
+
+    for(let i = 0; i < resp.length; i++){
+        let tx_url = `https://sepolia-explorer-api.metisdevops.link/api/v2/transactions/${resp[i].tx_hash}`
+        let tx_info = await axios.get(tx_url, {
+            headers: {
+                'accept': 'application/json'
+            }
+        });
+        if(tx_info.data.value > 0){
+            resp[i].type = "buy"
+        }else{
+            resp[i].type = "sell"
+        }
+    }
 
     res.json(resp)
 }
