@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@envio-dev/hypersync-client": "^0.6.2",
     "@google-cloud/local-auth": "^2.1.0",
     "@truffle/hdwallet-provider": "^1.7.0",
     "axios": "^1.4.0",
