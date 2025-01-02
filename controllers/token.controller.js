@@ -51,7 +51,7 @@ exports.get_xau_price = async(req, res, next) =>{
 
 exports.get_tx_by_addr = async(req, res, next) =>{
     let addr = req.query.addr
-    let contract = "0x49f1fFb0411a6cF723638628189d305a1e54968C"
+    let contract = "0xB9aCc98206Bf46373072c2351dbeE748c542DE3d"
     const url = `https://sepolia-explorer-api.metisdevops.link/api/v2/addresses/${addr}/transactions?filter=${contract}`;
 
     const response = await axios.get(url, {
@@ -80,6 +80,45 @@ exports.get_tx_by_addr = async(req, res, next) =>{
             resp[i].type = "buy"
         }else{
             resp[i].type = "sell"
+        }
+    }
+
+    res.json(resp)
+}
+
+exports.get_stake_tx = async(req, res, next) =>{
+    let addr = req.query.addr
+    let contract = "0x49f1fFb0411a6cF723638628189d305a1e54968C"
+
+    const url = `https://sepolia-explorer-api.metisdevops.link/api/v2/addresses/${addr}/transactions?filter=${contract}`;
+
+    const response = await axios.get(url, {
+        headers: {
+            'accept': 'application/json'
+        }
+    });
+
+    let resp = response.data.items.map((item) =>{        
+        return {
+            tx_hash: item.hash,
+            from: addr,
+            to: contract,
+            timestamp: item.timestamp
+        }
+    })
+
+    for(let i = 0; i < resp.length; i++){
+        let tx_url = `https://sepolia-explorer-api.metisdevops.link/api/v2/transactions/${resp[i].tx_hash}`
+        let tx_info = await axios.get(tx_url, {
+            headers: {
+                'accept': 'application/json'
+            }
+        });
+        // console.log("Tx info data: ", tx_info)
+        if(tx_info.data.method == "stake"){
+            resp[i].type = "stake"
+        }else{
+            resp[i].type = "unstake"
         }
     }
 
