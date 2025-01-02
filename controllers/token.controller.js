@@ -51,7 +51,7 @@ exports.get_xau_price = async(req, res, next) =>{
 
 exports.get_tx_by_addr = async(req, res, next) =>{
     let addr = req.query.addr
-    let contract = "0x01368f47E2DA0F8259E6d9D23dA18e3CCec02a39"
+    let contract = "0x49f1fFb0411a6cF723638628189d305a1e54968C"
     const url = `https://sepolia-explorer-api.metisdevops.link/api/v2/addresses/${addr}/transactions?filter=${contract}`;
 
     const response = await axios.get(url, {
