@@ -51,8 +51,48 @@ exports.get_xau_price = async(req, res, next) =>{
 
 exports.get_tx_by_addr = async(req, res, next) =>{
     let addr = req.query.addr
+    let chain = req.query.chain
     let contract = "0xB9aCc98206Bf46373072c2351dbeE748c542DE3d"
-    const url = `https://sepolia-explorer-api.metisdevops.link/api/v2/addresses/${addr}/transactions?filter=${contract}`;
+    let chain_url = 'https://sepolia-explorer-api.metisdevops.link/api/v2'
+
+    let url = `${chain_url}/addresses/${addr}/transactions?filter=${contract}`;
+
+    if(chain == "stt"){
+        chain_url = 'https://api.socialscan.io/dream-somnia/v1/explorer'
+        url = `${chain_url}/address/${addr}/transactions`
+
+        const response = await axios.get(url, {
+            headers: {
+                'accept': 'application/json'
+            }
+        });
+    
+        let resp = response.data.data.map((item) =>{        
+            return {
+                tx_hash: item.hash,
+                from: addr,
+                to: contract,
+                timestamp: item.timestamp
+            }
+        })
+    
+        for(let i = 0; i < resp.length; i++){
+            let tx_url = `${chain_url}/transaction/${resp[i].tx_hash}`
+            let tx_info = await axios.get(tx_url, {
+                headers: {
+                    'accept': 'application/json'
+                }
+            });
+            if(tx_info.data.value > 0){
+                resp[i].type = "buy"
+            }else{
+                resp[i].type = "sell"
+            }
+        }
+    
+        res.json(resp)
+        return
+    }
 
     const response = await axios.get(url, {
         headers: {
@@ -70,7 +110,7 @@ exports.get_tx_by_addr = async(req, res, next) =>{
     })
 
     for(let i = 0; i < resp.length; i++){
-        let tx_url = `https://sepolia-explorer-api.metisdevops.link/api/v2/transactions/${resp[i].tx_hash}`
+        let tx_url = `${chain_url}/transactions/${resp[i].tx_hash}`
         let tx_info = await axios.get(tx_url, {
             headers: {
                 'accept': 'application/json'

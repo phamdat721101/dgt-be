@@ -1,5 +1,7 @@
-// const { Wallet } = require('ethers')
-// const { now } = require("mongoose")
-// const wallet = Wallet.createRandom()
-// const vaults = require('../services/vault')
+const data = require('../config/chain')
 
+exports.get_chain_data = async(req, res, next) =>{
+    res.json({
+        data
+    });
+}
